@@ -1,11 +1,8 @@
+@import './style/font.css';
+
 body {
-  background-color: #d1d2d4;
-}
-
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
+  font-family: 'Inter Regular', sans-serif;
+  background-color: #f5f5f5;
+  margin: 0;
   padding: 0;
-  /* text-align: center; */
 }
-
