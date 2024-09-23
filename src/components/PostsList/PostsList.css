@@ -1,0 +1,11 @@
+.posts__list {
+    display: flex;
+    flex-direction: column;
+
+    width: 940px;
+    height: 80vh;
+
+    border: 1px solid red;
+    margin: auto;
+    padding: 0;
+}

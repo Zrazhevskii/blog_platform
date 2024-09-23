@@ -48,3 +48,14 @@
     border: 1px solid #52c4a1;
     border-radius: 5px;
 }
+
+.header__title__text {
+    border: none;
+    background-color: #fff;
+    font-weight: 400;
+    font-size: 18px;
+}
+
+.header__title__text:hover {
+    cursor: pointer;
+}
