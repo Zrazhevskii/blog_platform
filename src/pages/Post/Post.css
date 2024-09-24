@@ -3,9 +3,9 @@
     flex-direction: row;
 
     width: 100%;
-    height: 140px;
+    height: 130px;
 
-    margin-top: 26px;
+    margin-top: 20px;
     padding: 15px 14px 24px 16px;
 
     background-color: #fff;
@@ -16,8 +16,7 @@
     display: flex;
     flex-direction: column;
 
-    width: 70%;
-    border: 1px solid red;
+    width: 75%;
 }
 
 .post__box__title__box {
@@ -31,6 +30,7 @@
 .post__box__title {
     font-size: 20px;
     font-weight: 400;
+
     margin: 0;
     color: #1890ff;
 }
@@ -40,15 +40,77 @@
     justify-content: center;
     align-items: center;
 
-    width: 15%;
+    width: 13%;
 }
 
 .post__box__favorites::before {
     content: '';
+
     width: 17px;
     height: 17px;
+
     background: no-repeat url('../../assets/heart.png');
+
     position: relative;
-    left: -10px;
+    left: -5px;
 }
 
+.post__box__tags__box {
+    display: flex;
+    flex-direction: row;
+
+    margin-top: 5px;
+}
+
+.post__box__tag {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    background-color: rgb(245, 239, 239);
+
+    font-size: 12px;
+    font-weight: 400;
+    
+    border: 1px solid black;
+    border-radius: 2px;
+
+    padding: 2px;
+    margin-right: 10px;
+}
+
+.post__box__description {
+    font-size: 12px;
+    font-weight: 400;
+
+    margin-top: 10px;
+}
+
+.post__box__author__box {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    width: 25%;
+}
+
+.post__box__name {
+    font-size: 18px;
+}
+
+.post__box__name__box {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    margin-right: 20px;
+}
+
+.post__box__img {
+    width: 46px;
+    height: 46px;
+}
+
+.post__box__created {
+    font-size: 12px;
+    opacity: 0.5;
+}
