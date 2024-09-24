@@ -1,10 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
-import PostsListReduser from '../redusers/PostsListReduser';
+import { articlesApi } from '../servises/articlesApi';
+// import ArticlesListReduser from '../redusers/ArticlesListReduser';
 
 const store = configureStore({
     reducer: {
-        posts: PostsListReduser,
+        [articlesApi.reducerPath]: articlesApi.reducer,
+        // posts: ArticlesListReduser,
     },
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(articlesApi.middleware),
 });
 
 export default store;

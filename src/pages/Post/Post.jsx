@@ -20,7 +20,7 @@ export default function Post({ elem }) {
                     <div className="post__box__favorites">{favoritesCount}</div>
                 </div>
                 <div className="post__box__tags__box">
-                    {tags.map((item) => {
+                    {tags && tags.map((item) => {
                         return (
                             <span key={item} className="post__box__tag">
                                 {item}

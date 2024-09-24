@@ -41,7 +41,7 @@ const initialState = {
     error: false,
 };
 
-const PostsListReduser = createSlice({
+const ArticlesListReduser = createSlice({
     name: 'posts',
     initialState,
     reducers: {
@@ -51,5 +51,5 @@ const PostsListReduser = createSlice({
     },
 });
 
-export const { addPosts } = PostsListReduser.actions;
-export default PostsListReduser.reducer;
+export const { addPosts } = ArticlesListReduser.actions;
+export default ArticlesListReduser.reducer;
