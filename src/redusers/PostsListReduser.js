@@ -15,7 +15,7 @@ const initialState = {
             author: {
                 username: 'jake',
                 bio: 'I work at State Farm.',
-                image: 'https://i.stack.imgur.com/xHWG8.jpg',
+                image: 'https://filmschoolrejects.com/wp-content/uploads/2020/04/BigLebowski-700x480.jpg',
                 following: false,
             },
         },
@@ -32,7 +32,7 @@ const initialState = {
             author: {
                 username: 'jake',
                 bio: 'I work at State Farm.',
-                image: 'https://i.stack.imgur.com/xHWG8.jpg',
+                image: 'https://filmschoolrejects.com/wp-content/uploads/2020/04/BigLebowski-700x480.jpg',
                 following: false,
             },
         },
