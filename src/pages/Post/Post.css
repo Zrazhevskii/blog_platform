@@ -1,0 +1,54 @@
+.post__box {
+    display: flex;
+    flex-direction: row;
+
+    width: 100%;
+    height: 140px;
+
+    margin-top: 26px;
+    padding: 15px 14px 24px 16px;
+
+    background-color: #fff;
+    box-shadow: 8px 8px 13px -5px rgba(0,0,0,0.61);
+}
+
+.post__box__content {
+    display: flex;
+    flex-direction: column;
+
+    width: 70%;
+    border: 1px solid red;
+}
+
+.post__box__title__box {
+    display: flex;
+    flex-direction: row;
+
+    min-width: 50%;
+    /* border: 1px solid red; */
+}
+
+.post__box__title {
+    font-size: 20px;
+    font-weight: 400;
+    margin: 0;
+    color: #1890ff;
+}
+
+.post__box__favorites {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 15%;
+}
+
+.post__box__favorites::before {
+    content: '';
+    width: 17px;
+    height: 17px;
+    background: no-repeat url('../../assets/heart.png');
+    position: relative;
+    left: -10px;
+}
+
