@@ -67,8 +67,10 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+    height: 20px;
 
-    background-color: rgb(245, 239, 239);
+    box-sizing: border-box;
+    background-color: rgb(254, 253, 253);
 
     font-size: 12px;
     font-weight: 400;
@@ -76,7 +78,7 @@
     border: 1px solid black;
     border-radius: 2px;
 
-    padding: 2px;
+    padding: 2px 4px;
     margin-right: 10px;
 }
 

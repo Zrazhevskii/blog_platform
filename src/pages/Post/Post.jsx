@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { format } from 'date-fns';
 
 export default function Post({ elem }) {
-    const { title, favoritesCount, tags, description, createdAt, author } = elem;
+    const { title, favoritesCount, tagList, description, createdAt, author } = elem;
     const { username, image } = author;
     const user = username
         .split(' ')
@@ -20,15 +20,17 @@ export default function Post({ elem }) {
                     <div className="post__box__favorites">{favoritesCount}</div>
                 </div>
                 <div className="post__box__tags__box">
-                    {tags && tags.map((item) => {
-                        return (
-                            <span key={item} className="post__box__tag">
-                                {item}
-                            </span>
-                        );
-                    })}
+                    {tagList.length
+                        ? tagList.map((item) => {
+                              return (
+                                  <span key={item} className="post__box__tag">
+                                      {item}
+                                  </span>
+                              );
+                          })
+                        : 'без тегов'}
                 </div>
-                <div className="post__box__description">{description.split(' ').slice(0, 10).join(' ')}</div>
+                <div className="post__box__description">{description.split(' ').slice(0, 50).join(' ')}</div>
             </div>
             <div className="post__box__author__box">
                 <div className="post__box__name__box">
@@ -45,7 +47,7 @@ Post.propTypes = {
     elem: PropTypes.shape({
         title: PropTypes.string,
         favoritesCount: PropTypes.number,
-        tags: PropTypes.arrayOf(PropTypes.string),
+        tagList: PropTypes.arrayOf(PropTypes.string),
         description: PropTypes.string,
         createdAt: PropTypes.string,
         author: PropTypes.shape({

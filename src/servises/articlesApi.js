@@ -8,21 +8,21 @@ export const articlesApi = createApi({
     tagTypes: ['Articles', 'Article', 'User'],
     endpoints: (build) => ({
         getArticles: build.query({
-            query: ({ limit = 5, currentPage = 1 } = {}) => ({
-                url: 'Articles',
+            query: ({ limit = 5, currentPage = 1 }) => ({
+                url: 'articles',
                 params: { limit, offset: (currentPage - 1) * limit },
                 metod: 'GET',
             }),
             providesTags: (result) =>
-                // console.log(result),
+                // console.log(result)
                 result
                     ? [
-                          ...result.map(({ slug }) => ({ type: 'Articles', id: slug })),
+                          ...result.articles.map(({ slug }) => ({ type: 'Articles', id: slug })),
                           { type: 'Articles', id: 'List' },
                       ]
                     : [{ type: 'Articles', id: 'List' }],
 
-            transformResponse: (response) => response.articles,
+            // transformResponse: (response) => response,
         }),
     }),
 });
