@@ -1,36 +1,21 @@
 // import React from 'react';
 import { NavLink, useParams } from 'react-router-dom';
+import { PuffLoader } from 'react-spinners';
 import { format } from 'date-fns';
 import './Article.css';
 import { changeUserName } from '../../helpers/changeUserName';
 import { useGetArticleItemQuery } from '../../servises/articlesApi';
 
 export default function Article() {
-    // const data = {
-    //     article: {
-    //         slug: 'how-to-train-your-dragon',
-    //         title: 'How to train your dragon',
-    //         description: 'Ever wonder how?',
-    //         body: 'It takes a Jacobian',
-    //         tagsList: ['dragons', 'training'],
-    //         createdAt: '2024-05-04T09:42:00+00:00',
-    //         updatedAt: '2024-05-04T09:42:00+00:00',
-    //         favorited: false,
-    //         favoritesCount: 42,
-    //         author: {
-    //             bio: 'I work at State Farm.',
-    //             image: 'https://api.realworld.io/images/smiley-cyrus.jpg',
-    //             username: 'jake',
-    //             following: false,
-    //         },
-    //     },
-    // };
     const { slug } = useParams();
     const { data, isLoading, isSuccess } = useGetArticleItemQuery(slug);
-    // console.log(data);
 
     if (isLoading) {
-        return <div>Загрузка...</div>;
+        return (
+            <div className="loader">
+                <PuffLoader color="#52c4a1" size={130} />
+            </div>
+        );
     }
 
     const { title, favoritesCount, body, tagList, description, createdAt, author } = data.article;
