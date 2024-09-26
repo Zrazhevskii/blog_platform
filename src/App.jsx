@@ -6,7 +6,7 @@ import Layout from './components/Layout/index';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import ArticlesList from './components/ArticlesList/index';
-// import Header from './components/Header';
+import Article from './pages/Article/Article';
 
 function App() {
     // const [count, setCount] = useState(0);
@@ -15,6 +15,7 @@ function App() {
         <Routes>
             <Route path="/" element={<Layout />}>
                 <Route index element={<ArticlesList />} />
+                <Route path="articles/:slug" element={<Article />} />
                 <Route path="sign-up" element={<SignUp />} />
                 <Route path="sign-in" element={<SignIn />} />
                 <Route path="*" element={<PageNotFound />} />

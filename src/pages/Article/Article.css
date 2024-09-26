@@ -1,0 +1,19 @@
+@import '../PostsItem/PostsItem.css';
+
+.article__wrapper {
+    display: grid;
+    grid-template-rows: 140px 1fr ;
+    box-sizing: border-box;
+
+    padding-top: 26px;
+    margin: auto;
+
+    width: 940px;
+    height: 800px;
+    background-color: #ebeef3;
+}
+
+.article__content {
+    padding: 0 16px 16px 16px;
+    background-color: #ffffff;
+}

@@ -1,22 +1,23 @@
-import './Post.css';
+import './PostsItem.css';
 import PropTypes from 'prop-types';
 import { format } from 'date-fns';
+// import { NavLink, useParams } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { changeUserName } from '../../helpers/changeUserName';
 
-export default function Post({ elem }) {
-    const { title, favoritesCount, tagList, description, createdAt, author } = elem;
+export default function PostsItem({ elem }) {
+    // const { slug } = useParams();
+    const { slug, title, favoritesCount, tagList, description, createdAt, author } = elem;
     const { username, image } = author;
-    const user = username
-        .split(' ')
-        .map((el) => el.slice(0, 1).toUpperCase() + el.slice(1))
-        .join(' ');
-    // console.log(user);
     const date = createdAt ? format(createdAt, 'MMMM dd, yyyy') : 'Дата неуказана';
 
     return (
-        <section className="post__box">
+        <section className="post__box post__box_shadow-margin">
             <div className="post__box__content">
                 <div className="post__box__title__box">
-                    <h4 className="post__box__title">{title}</h4>
+                    <NavLink to={`/articles/${slug}`} className="post__box__title">
+                        {title}
+                    </NavLink>
                     <div className="post__box__favorites">{favoritesCount}</div>
                 </div>
                 <div className="post__box__tags__box">
@@ -34,7 +35,7 @@ export default function Post({ elem }) {
             </div>
             <div className="post__box__author__box">
                 <div className="post__box__name__box">
-                    <span className="post__box__name">{user}</span>
+                    <span className="post__box__name">{changeUserName(username)}</span>
                     <span className="post__box__created">{date}</span>
                 </div>
                 <img src={image} alt="автор" className="post__box__img" />
@@ -43,8 +44,9 @@ export default function Post({ elem }) {
     );
 }
 
-Post.propTypes = {
+PostsItem.propTypes = {
     elem: PropTypes.shape({
+        slug: PropTypes.string,
         title: PropTypes.string,
         favoritesCount: PropTypes.number,
         tagList: PropTypes.arrayOf(PropTypes.string),

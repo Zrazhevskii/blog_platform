@@ -5,9 +5,8 @@
     position: relative;
 
     width: 940px;
-    height: 1050px;
+    height: 890px;
 
-    /* border: 1px solid red; */
     margin: auto;
     padding: 0;
 }
@@ -15,9 +14,7 @@
 .post__list__pagination {
     position: absolute;
     left: 450px;
-    /* background-color: rgb(155, 143, 143); */
-    /* bottom: 0; */
-    top: 1050px;
+    top: 896px;
 }
  :where(.css-dev-only-do-not-override-qnu6hi).ant-pagination .ant-pagination-item {
     background-color: #ebeef3;
@@ -26,7 +23,6 @@
 :where(.css-dev-only-do-not-override-qnu6hi).ant-pagination .ant-pagination-item-active a {
     color: #fff;
     background-color: #1677ff;
-    /* border: none; */
     border-radius: 5px;
 }
 

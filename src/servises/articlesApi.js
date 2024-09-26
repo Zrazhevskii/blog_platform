@@ -24,7 +24,15 @@ export const articlesApi = createApi({
 
             // transformResponse: (response) => response,
         }),
+        getArticleItem: build.query({
+            query: (slug) => ({
+                url: `articles/${slug}`,
+                method: 'GET',
+            }),
+            providesTags: ['Article'],
+            // transformResponse: (response) => response,
+        }),
     }),
 });
 
-export const { useGetArticlesQuery } = articlesApi;
+export const { useGetArticlesQuery, useGetArticleItemQuery } = articlesApi;
