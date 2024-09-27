@@ -15,8 +15,9 @@ module.exports = {
     settings: { react: { version: '18.2' } },
     plugins: ['react-refresh', 'react', 'import', 'jsx-a11y'],
     rules: {
-        camelcase: 'off',
-        "import/prefer-default-export": "off", // далее отключить
+        // camelcase: 'off',
+        'react/jsx-props-no-spreading': 'off',
+        'import/prefer-default-export': 'off', // далее отключить
         'react/react-in-jsx-scope': 'off',
         'no-console': 'off',
         'prettier/prettier': ['error'],

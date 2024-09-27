@@ -35,7 +35,7 @@ export default function ArticlesList() {
             <div className="post__list__pagination">
                 <Pagination
                     showSizeChanger={false}
-                    defaultCurrent={1}
+                    defaultCurrent={currentPage}
                     total={data?.articlesCount}
                     pageSize={5}
                     hideOnSinglePage
