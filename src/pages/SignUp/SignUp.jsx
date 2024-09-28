@@ -7,12 +7,12 @@ import LabelUser from '../../components/Form/LabelUser';
 import Email from '../../components/Form/Email';
 import Password from '../../components/Form/Password';
 import Checkbox from '../../components/Form/Checkbox';
-import { schema } from '../../components/Form/formSchema';
+import { schemaSighUp } from '../../components/Form/formSchema';
 
 export default function SignUp() {
     const form = useForm({
         mode: 'onChange',
-        resolver: yupResolver(schema),
+        resolver: yupResolver(schemaSighUp),
     });
 
     const { handleSubmit, reset } = form;
@@ -25,7 +25,9 @@ export default function SignUp() {
     return (
         <section className="registration__form">
             <div className="registration__form__box registration__form__box_high">
-                <span className="registration__form__title registration__form__title_margin-bottom">Sign Up</span>
+                <span className="registration__form__title registration__form__title_margin-bottom">
+                    Create new account
+                </span>
                 <form action="" className="form" onSubmit={handleSubmit(onSubmit)}>
                     <LabelUser form={form} name="username" />
                     <Email form={form} name="email" />

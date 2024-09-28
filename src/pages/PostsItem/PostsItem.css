@@ -20,6 +20,7 @@
     flex-direction: column;
 
     width: 75%;
+    /* height: 70px; */
 }
 
 .post__box__title__box {
@@ -87,6 +88,8 @@
 }
 
 .post__box__description {
+    display: block;
+    height: 50px;
     font-size: 12px;
     font-weight: 400;
 

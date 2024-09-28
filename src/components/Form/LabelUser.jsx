@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './Form.css';
 // import { message } from 'antd';
 
 export default function LabelUser({ form, name }) {
