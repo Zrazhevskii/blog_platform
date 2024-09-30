@@ -1,10 +1,11 @@
-// import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import './SignUp.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Alert } from 'antd';
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { toggleInAccount } from '../../redusers/ArticlesListReduser';
 import LabelUser from '../../components/Form/LabelUser';
 import Email from '../../components/Form/Email';
 import Password from '../../components/Form/Password';
@@ -12,13 +13,10 @@ import Checkbox from '../../components/Form/Checkbox';
 import { schemaSighUp } from '../../components/Form/formSchema';
 import { useRegisterUserMutation } from '../../servises/authUserApi';
 
-// export const errorFunc = (bool) => {
-//     return bool;
-// };
-
 export default function SignUp() {
+    const dispatch = useDispatch();
     const [registerUser, { isSuccess, isError }] = useRegisterUserMutation();
-    // const navigator
+    const navigate = useNavigate();
     const [succes, setSucces] = useState(isSuccess);
     const form = useForm({
         mode: 'onChange',
@@ -29,14 +27,15 @@ export default function SignUp() {
 
     useEffect(() => {
         let interval;
-        if (isSuccess) {
-            console.log(isSuccess);
+        if (succes) {
             interval = setTimeout(() => {
+                navigate('/');
+                dispatch(toggleInAccount(true));
                 setSucces(false);
             }, 2000);
         }
         return clearTimeout(interval);
-    }, [isSuccess]);
+    }, [succes, dispatch, navigate]);
 
     const { handleSubmit, reset } = form;
 
@@ -53,7 +52,6 @@ export default function SignUp() {
                 reset();
             })
             .catch((err) => {
-                // console.error('rejected тут - ', Object.keys(err.data.errors));
                 if (err.status === 422) {
                     Object.keys(err.data.errors).forEach((field) => {
                         setError(field, {
@@ -62,10 +60,7 @@ export default function SignUp() {
                         });
                     });
                 }
-                // console.log(isError);
             });
-        // reset();
-        // console.log(response);
     };
 
     if (isError) {

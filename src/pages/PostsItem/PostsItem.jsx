@@ -24,7 +24,7 @@ export default function PostsItem({ elem }) {
                     {tagList.length
                         ? tagList.map((item) => {
                               return (
-                                  <span key={item} className="post__box__tag">
+                                  <span key={slug} className="post__box__tag">
                                       {item}
                                   </span>
                               );

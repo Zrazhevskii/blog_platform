@@ -4,8 +4,15 @@ export const articlesApi = createApi({
     reducerPath: 'articlesApi',
     baseQuery: fetchBaseQuery({
         baseUrl: 'https://blog.kata.academy/api/',
+        prepareHeaders: (headers) => {
+            const token = localStorage.getItem('token');
+            if (token) {
+                headers.set('Authorization', `Token ${token}`);
+            }
+            return headers;
+        },
     }),
-    tagTypes: ['Articles', 'Article', 'User'],
+    tagTypes: ['Articles', 'Article'],
     endpoints: (build) => ({
         getArticles: build.query({
             query: ({ limit = 5, currentPage = 1 }) => ({
@@ -14,7 +21,6 @@ export const articlesApi = createApi({
                 metod: 'GET',
             }),
             providesTags: (result) =>
-                // console.log(result)
                 result
                     ? [
                           ...result.articles.map(({ slug }) => ({ type: 'Articles', id: slug })),

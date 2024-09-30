@@ -27,11 +27,13 @@ export default function ArticlesList() {
 
     return (
         <>
-            <div className="posts__list">
+            <main className="posts__list">
                 {data?.articles.map((elem) => {
-                    return <PostsItem elem={elem} key={elem.slug} />;
+                    const id = elem.updatedAt;
+                    console.log(id);
+                    return <PostsItem elem={elem} key={id} />;
                 })}
-            </div>
+            </main>
             <div className="post__list__pagination">
                 <Pagination
                     showSizeChanger={false}

@@ -4,6 +4,13 @@ export const authUserApi = createApi({
     reducerPath: 'authUserApi',
     baseQuery: fetchBaseQuery({
         baseUrl: 'https://blog.kata.academy/api/',
+        prepareHeaders: (headers) => {
+            const token = localStorage.getItem('token');
+            if (token) {
+                headers.set('Authorization', `Token ${token}`);
+            }
+            return headers;
+        },
     }),
     tagTypes: ['User'],
     endpoints: (builder) => ({
@@ -13,13 +20,19 @@ export const authUserApi = createApi({
                 method: 'POST',
                 body,
             }),
-            transformResponse: (response) => {
-                console.log(response);
-                return response;
+        }),
+        getCurrentUser: builder.query({
+            query: () => ({
+                url: 'user/login',
+                method: 'GET',
+            }),
+            providesTags: ['User'],
+            transformResponse: (result) => {
+                const { username, email, image = '' } = result.user;
+                return { username, email, image };
             },
-            // transformErrorResponse:
         }),
     }),
 });
 
-export const { useRegisterUserMutation } = authUserApi;
+export const { useRegisterUserMutation, useGetCurrentUserQuery } = authUserApi;

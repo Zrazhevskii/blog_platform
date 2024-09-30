@@ -2,7 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     currentPage: 1,
-    isAuthenticated: false,
     inAccount: false,
 };
 
@@ -14,8 +13,12 @@ const ArticlesListReduser = createSlice({
             // eslint-disable-next-line no-param-reassign
             state.currentPage = payload;
         },
+        toggleInAccount: (state, { payload }) => {
+            // eslint-disable-next-line no-param-reassign
+            state.inAccount = payload;
+        },
     },
 });
 
-export const { toggleCurrentPage } = ArticlesListReduser.actions;
+export const { toggleCurrentPage, toggleInAccount } = ArticlesListReduser.actions;
 export default ArticlesListReduser.reducer;
