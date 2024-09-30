@@ -8,10 +8,7 @@ import Email from '../../components/Form/Email';
 import Password from '../../components/Form/Password';
 
 export default function SignIn() {
-    const form = useForm({
-        // mode: 'onChange',
-        // resolver: yupResolver(shemaSignIn),
-    });
+    const form = useForm();
     const { handleSubmit } = form;
 
     const onSubmit = (data) => {

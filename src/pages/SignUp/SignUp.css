@@ -1,3 +1,9 @@
 .registration__form__box_high {
     min-height: 599px;
 }
+
+.registration__form__popup {
+    position: absolute;
+    top: -60px;
+    left: 470px;
+}

@@ -16,7 +16,7 @@ export default function LabelUser({ form, name }) {
             <input
                 {...register(name)}
                 id="username"
-                className={`${'form__input'} ${errors?.[name] ? 'form__input_margin-top' : 'form__input form__input_margin'}`}
+                className={`${'form__input'} ${errors?.[name] ? 'form__input_margin-top' : 'form__input_margin'}`}
                 placeholder="Username"
             />
             <div>{errors?.[name] && <p className="errors__text">{errors?.[name]?.message || 'Error'}</p>}</div>
