@@ -3,7 +3,7 @@ import './SignUp.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Alert } from 'antd';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { toggleInAccount } from '../../redusers/ArticlesListReduser';
 import LabelUser from '../../components/Form/LabelUser';
@@ -15,27 +15,29 @@ import { useRegisterUserMutation } from '../../servises/authUserApi';
 
 export default function SignUp() {
     const dispatch = useDispatch();
-    const [registerUser, { isSuccess, isError }] = useRegisterUserMutation();
+    const [registerUser, { isSuccess }] = useRegisterUserMutation();
     const navigate = useNavigate();
-    const [succes, setSucces] = useState(isSuccess);
+    const [succes, setSucces] = useState(false);
     const form = useForm({
         mode: 'onChange',
         resolver: yupResolver(schemaSighUp),
     });
 
     const { setError } = form;
+    // setSucces(true);
 
-    useEffect(() => {
-        let interval;
-        if (succes) {
-            interval = setTimeout(() => {
-                navigate('/');
-                dispatch(toggleInAccount(true));
-                setSucces(false);
-            }, 2000);
-        }
-        return clearTimeout(interval);
-    }, [succes, dispatch, navigate]);
+    console.log(succes);
+
+    const chengeHeader = () => {
+        console.log(isSuccess);
+        setTimeout(() => {
+            dispatch(toggleInAccount(true));
+            setSucces(false);
+            // console.log(succes);
+            navigate('/');
+        }, 2000);
+        // return clearTimeout(interval);
+    };
 
     const { handleSubmit, reset } = form;
 
@@ -49,10 +51,13 @@ export default function SignUp() {
                 console.log('fulfilled', payload);
                 localStorage.setItem('token', payload.user.token);
                 setSucces(true);
+                chengeHeader();
                 reset();
             })
             .catch((err) => {
+                console.log(err);
                 if (err.status === 422) {
+                    // console.log('это err - ', err);
                     Object.keys(err.data.errors).forEach((field) => {
                         setError(field, {
                             type: 'server',
@@ -63,12 +68,12 @@ export default function SignUp() {
             });
     };
 
-    if (isError) {
-        console.log(isError);
-        return (
-            <Alert message="Error" description="Что-то пошло не так, перегрузите страницу..." type="error" showIcon />
-        );
-    }
+    // if (isError) {
+    //     console.log(isError);
+    //     return (
+    //         <Alert message="Error" description="Что-то пошло не так, перегрузите страницу..." type="error" showIcon />
+    //     );
+    // }
 
     return (
         <section className="registration__form">

@@ -19,11 +19,11 @@
     display: flex;
     flex-direction: column;
 
-    width: 75%;
+    width: 80%;
     /* height: 70px; */
 }
 
-.post__box__title__box {
+.post__box__title-box {
     display: flex;
     flex-direction: row;
 
@@ -60,7 +60,7 @@
     left: -5px;
 }
 
-.post__box__tags__box {
+.post__box__tags-box {
     display: flex;
     flex-direction: row;
 
@@ -96,18 +96,18 @@
     margin-top: 10px;
 }
 
-.post__box__author__box {
+.post__box__author-box {
     display: flex;
     flex-direction: row;
     justify-content: end;
-    width: 25%;
+    width: 20%;
 }
 
 .post__box__name {
     font-size: 18px;
 }
 
-.post__box__name__box {
+.post__box__name-box {
     display: flex;
     flex-direction: column;
     align-items: end;
@@ -115,8 +115,9 @@
 }
 
 .post__box__img {
-    width: 46px;
-    height: 46px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
 }
 
 .post__box__created {

@@ -24,3 +24,52 @@
     margin: auto;
     margin-top: 30px;
 }
+
+.post__box__author-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+}
+
+.post__box__author-box_width {
+    /* position: relative; */
+    width: 100%;
+}
+
+.box__btns {
+    position: relative;
+
+    display: flex;
+    justify-content: space-between;
+
+    width: 85%;
+    margin-top: auto;
+    margin-left: auto;
+}
+
+.box__btns__delete {
+    width: 80px;
+    height: 32px;
+
+    border: 1px solid #f5222d;
+    border-radius: 5px;
+
+    color: #f5222d;
+    background-color: #ffffff;
+}
+
+.box__btns__delete:hover, .box__btns__edit:hover {
+    cursor: pointer;
+    transform: scale(1.04);
+}
+
+.box__btns__edit {
+    width: 66px;
+    height: 32px;
+
+    border: 1px solid #52c41a;
+    border-radius: 5px;
+
+    color: #52c41a;
+    background-color: #ffffff;
+}

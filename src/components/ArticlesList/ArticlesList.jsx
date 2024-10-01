@@ -29,9 +29,7 @@ export default function ArticlesList() {
         <>
             <main className="posts__list">
                 {data?.articles.map((elem) => {
-                    const id = elem.updatedAt;
-                    console.log(id);
-                    return <PostsItem elem={elem} key={id} />;
+                    return <PostsItem elem={elem} key={elem.updatedAt} />;
                 })}
             </main>
             <div className="post__list__pagination">

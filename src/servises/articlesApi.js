@@ -12,7 +12,7 @@ export const articlesApi = createApi({
             return headers;
         },
     }),
-    tagTypes: ['Articles', 'Article'],
+    tagTypes: ['Articles', 'Article', 'User'],
     endpoints: (build) => ({
         getArticles: build.query({
             query: ({ limit = 5, currentPage = 1 }) => ({

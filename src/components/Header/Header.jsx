@@ -1,24 +1,25 @@
 import { useNavigate, NavLink, Link } from 'react-router-dom';
 import './Header.css';
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useGetCurrentUserQuery } from '../../servises/authUserApi';
 import imgProfile from '../../assets/imgProfile.png';
+import { toggleInAccount } from '../../redusers/ArticlesListReduser';
 
 export default function Header() {
     const navigate = useNavigate();
-    const data = useGetCurrentUserQuery();
-    console.log(data);
+    const dispatch = useDispatch();
+    const { data } = useGetCurrentUserQuery();
+    // console.log(data);
+    const storage = localStorage.getItem('token');
     const inAccount = useSelector((state) => state.articles.inAccount);
     // console.log(inAccount);
     // console.log(localStorage.getItem('token'));
     useEffect(() => {
-        if (inAccount) {
-            if (localStorage.getItem('token')) {
-                console.log(localStorage.getItem('token'));
-            }
+        if (storage) {
+            dispatch(toggleInAccount(true));
         }
-    }, [inAccount]);
+    }, []);
 
     return (
         <header className="header">
@@ -34,7 +35,7 @@ export default function Header() {
                             Create article
                         </Link>
                         <Link to="/profile" className="header__link header__link_profile-style">
-                            {data.username}
+                            {data?.username}
                         </Link>
                         <div className="header__image">
                             <img src={data?.image || imgProfile} alt="profile" />
@@ -44,6 +45,7 @@ export default function Header() {
                             className="header__logout"
                             onClick={() => {
                                 localStorage.removeItem('token');
+                                dispatch(toggleInAccount(false));
                                 navigate('/');
                             }}
                         >

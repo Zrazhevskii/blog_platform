@@ -1,18 +1,7 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+// import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { articlesApi } from './articlesApi';
 
-export const authUserApi = createApi({
-    reducerPath: 'authUserApi',
-    baseQuery: fetchBaseQuery({
-        baseUrl: 'https://blog.kata.academy/api/',
-        prepareHeaders: (headers) => {
-            const token = localStorage.getItem('token');
-            if (token) {
-                headers.set('Authorization', `Token ${token}`);
-            }
-            return headers;
-        },
-    }),
-    tagTypes: ['User'],
+export const authUserApi = articlesApi.injectEndpoints({
     endpoints: (builder) => ({
         registerUser: builder.mutation({
             query: (body) => ({
@@ -23,11 +12,12 @@ export const authUserApi = createApi({
         }),
         getCurrentUser: builder.query({
             query: () => ({
-                url: 'user/login',
+                url: 'user',
                 method: 'GET',
             }),
             providesTags: ['User'],
             transformResponse: (result) => {
+                console.log(result);
                 const { username, email, image = '' } = result.user;
                 return { username, email, image };
             },

@@ -46,7 +46,7 @@
     color: black;
 }
 
-.header__link_sign-style:hover {
+.header__link_sign-style:hover, .header__link_create-style:hover {
     color: #52c4a1;
     border: 1px solid #52c4a1;
     border-radius: 5px;
@@ -110,4 +110,9 @@
     background-color: #fff;
     color: #000;
     border-radius: 5px;
+}
+
+.header__logout:hover {
+    cursor: pointer;
+    transform: scale(1.04);
 }
