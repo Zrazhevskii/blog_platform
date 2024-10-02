@@ -10,16 +10,13 @@ export default function Header() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { data } = useGetCurrentUserQuery();
-    // console.log(data);
     const storage = localStorage.getItem('token');
     const inAccount = useSelector((state) => state.articles.inAccount);
-    // console.log(inAccount);
-    // console.log(localStorage.getItem('token'));
     useEffect(() => {
         if (storage) {
             dispatch(toggleInAccount(true));
         }
-    }, []);
+    }, [storage, dispatch]);
 
     return (
         <header className="header">

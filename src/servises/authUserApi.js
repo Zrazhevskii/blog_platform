@@ -22,7 +22,14 @@ export const authUserApi = articlesApi.injectEndpoints({
                 return { username, email, image };
             },
         }),
+        getExistingUser: builder.mutation({
+            query: (body) => ({
+                url: 'users/login',
+                method: 'POST',
+                body,
+            }),
+        }),
     }),
 });
 
-export const { useRegisterUserMutation, useGetCurrentUserQuery } = authUserApi;
+export const { useRegisterUserMutation, useGetCurrentUserQuery, useGetExistingUserMutation } = authUserApi;

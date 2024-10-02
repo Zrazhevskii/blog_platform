@@ -15,31 +15,32 @@ import { useRegisterUserMutation } from '../../servises/authUserApi';
 
 export default function SignUp() {
     const dispatch = useDispatch();
-    const [registerUser, { isSuccess }] = useRegisterUserMutation();
+    const [registerUser] = useRegisterUserMutation();
     const navigate = useNavigate();
-    const [succes, setSucces] = useState(false);
+    const [servises, setServises] = useState({
+        succes: false,
+        error: false,
+    });
+
+    const { succes, error } = servises;
     const form = useForm({
         mode: 'onChange',
         resolver: yupResolver(schemaSighUp),
     });
 
-    const { setError } = form;
-    // setSucces(true);
-
-    console.log(succes);
-
     const chengeHeader = () => {
-        console.log(isSuccess);
         setTimeout(() => {
             dispatch(toggleInAccount(true));
-            setSucces(false);
-            // console.log(succes);
+            setServises((prev) => ({ ...prev, succes: false }));
             navigate('/');
         }, 2000);
-        // return clearTimeout(interval);
     };
 
-    const { handleSubmit, reset } = form;
+    const { handleSubmit, reset, setError } = form;
+
+    // setServises((prev) => ({ ...prev, error: true }));
+
+    // console.log(error);
 
     const onSubmit = async (data) => {
         const request = {
@@ -48,16 +49,13 @@ export default function SignUp() {
         await registerUser(request)
             .unwrap()
             .then((payload) => {
-                console.log('fulfilled', payload);
                 localStorage.setItem('token', payload.user.token);
-                setSucces(true);
+                setServises((prev) => ({ ...prev, succes: true }));
                 chengeHeader();
                 reset();
             })
             .catch((err) => {
-                console.log(err);
                 if (err.status === 422) {
-                    // console.log('это err - ', err);
                     Object.keys(err.data.errors).forEach((field) => {
                         setError(field, {
                             type: 'server',
@@ -65,21 +63,27 @@ export default function SignUp() {
                         });
                     });
                 }
+                if (err.status >= 500) {
+                    setServises((prev) => ({ ...prev, error: true }));
+                }
             });
     };
-
-    // if (isError) {
-    //     console.log(isError);
-    //     return (
-    //         <Alert message="Error" description="Что-то пошло не так, перегрузите страницу..." type="error" showIcon />
-    //     );
-    // }
 
     return (
         <section className="registration__form">
             <section className="registration__form__popup">
                 {succes && (
                     <Alert message="Success!" type="success" description="Вы успешно прошли регистрацию!" showIcon />
+                )}
+            </section>
+            <section className="registration__form__error">
+                {error && (
+                    <Alert
+                        message="Error!"
+                        type="error"
+                        description="Что-то пошло не так, перегрузите страницу..."
+                        showIcon
+                    />
                 )}
             </section>
             <div className="registration__form__box registration__form__box_high">

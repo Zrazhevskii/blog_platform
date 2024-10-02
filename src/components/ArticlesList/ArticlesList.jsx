@@ -21,7 +21,7 @@ export default function ArticlesList() {
 
     if (isError) {
         return (
-            <Alert message="Error" description="Что-то пошло не так, перегрузите страницу..." type="error" showIcon />
+            <Alert message="Error!" description="Что-то пошло не так, перегрузите страницу..." type="error" showIcon />
         );
     }
 

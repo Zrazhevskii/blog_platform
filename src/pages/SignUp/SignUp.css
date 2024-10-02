@@ -7,3 +7,12 @@
     top: -60px;
     left: 470px;
 }
+
+.registration__form__error {
+    position: absolute;
+    top: -60px;
+
+    width: 100%;
+
+    text-align: center;
+}

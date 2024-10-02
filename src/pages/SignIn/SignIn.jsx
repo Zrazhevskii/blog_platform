@@ -1,18 +1,52 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-// import { yupResolver } from '@hookform/resolvers/yup';
-import { Link } from 'react-router-dom';
-// import { shemaSignIn } from '../../components/Form/formSchema';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { toggleInAccount } from '../../redusers/ArticlesListReduser';
+import { shemaSignIn } from '../../components/Form/formSchema';
 import './SignIn.css';
 import Email from '../../components/Form/Email';
 import Password from '../../components/Form/Password';
+import { useGetExistingUserMutation } from '../../servises/authUserApi';
 
 export default function SignIn() {
-    const form = useForm();
-    const { handleSubmit } = form;
+    const [getExistingUser] = useGetExistingUserMutation();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const form = useForm({
+        mode: 'onChange',
+        resolver: yupResolver(shemaSignIn),
+    });
+    const { handleSubmit, reset, setError } = form;
 
-    const onSubmit = (data) => {
-        console.log(data);
+    const onSubmit = async (data) => {
+        const request = { user: { email: data.email, password: data.password } };
+        console.log(request);
+        await getExistingUser(request)
+            .unwrap()
+            .then((payload) => {
+                console.log('fulfilled', payload);
+                localStorage.setItem('token', payload.user.token);
+                dispatch(toggleInAccount(true));
+                reset();
+                navigate('/');
+            })
+            .catch((err) => {
+                console.log(err);
+                if (err.status === 422) {
+                    console.log('это err - ', err);
+                    ['email', 'password'].forEach((field) => {
+                        setError(field, {
+                            type: 'server',
+                            message: 'email or password is invalid',
+                        });
+                    });
+                }
+                if (err.status >= 500) {
+                    console.log('Это ошибка 500 - ', err);
+                }
+            });
     };
 
     return (

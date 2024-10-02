@@ -5,13 +5,15 @@ import { format } from 'date-fns';
 import { v4 as uuidv4 } from 'uuid';
 import './Article.css';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { changeUserName } from '../../helpers/changeUserName';
 import { useGetArticleItemQuery } from '../../servises/articlesApi';
 import Modal from '../../components/Modal/index';
-// import Modal from 'antd/es/modal/Modal';
 
 export default function Article() {
     const [showModal, setShowModal] = useState(false);
+    const inAccount = useSelector((state) => state.articles.inAccount);
+    console.log(inAccount);
     const { slug } = useParams();
     const { data, isLoading, isSuccess } = useGetArticleItemQuery(slug);
 
@@ -30,7 +32,6 @@ export default function Article() {
     const { title, favoritesCount, body, tagList, description, createdAt, author } = data.article;
     const { username, image } = author;
     const date = createdAt ? format(createdAt, 'MMMM dd, yyyy') : 'Дата неуказана';
-    // console.log(typeof body);
 
     return (
         isSuccess && (
@@ -64,19 +65,21 @@ export default function Article() {
                             </div>
                             <img src={image} alt="автор" className="post__box__img" />
                         </div>
-                        <div className="box__btns">
-                            <button
-                                type="button"
-                                className="box__btns__delete"
-                                onClick={() => handleChangeShowModal(true)}
-                            >
-                                Delete
-                            </button>
-                            {showModal && <Modal slug={slug} handleChangeShowModal={handleChangeShowModal} />}
-                            <button type="button" className="box__btns__edit">
-                                Edit
-                            </button>
-                        </div>
+                        {inAccount && (
+                            <div className="box__btns">
+                                <button
+                                    type="button"
+                                    className="box__btns__delete"
+                                    onClick={() => handleChangeShowModal(true)}
+                                >
+                                    Delete
+                                </button>
+                                {showModal && <Modal slug={slug} handleChangeShowModal={handleChangeShowModal} />}
+                                <button type="button" className="box__btns__edit">
+                                    Edit
+                                </button>
+                            </div>
+                        )}
                     </div>
                 </div>
                 <div className="article__content">{body}</div>
