@@ -24,11 +24,9 @@ export const articlesApi = createApi({
                 result
                     ? [
                           ...result.articles.map(({ slug }) => ({ type: 'Articles', id: slug })),
-                          { type: 'Articles', id: 'List' },
+                          { type: 'Articles', id: 'Articles-List' },
                       ]
-                    : [{ type: 'Articles', id: 'List' }],
-
-            // transformResponse: (response) => response,
+                    : [{ type: 'Articles', id: 'Articles-List' }],
         }),
         getArticleItem: build.query({
             query: (slug) => ({
@@ -36,9 +34,24 @@ export const articlesApi = createApi({
                 method: 'GET',
             }),
             providesTags: ['Article'],
-            // transformResponse: (response) => response,
+        }),
+        addNewArticle: build.mutation({
+            query: (body) => ({
+                url: 'articles',
+                method: 'POST',
+                body,
+            }),
+            invalidatesTags: [{ type: 'Articles', id: 'Articles-List' }],
+        }),
+        deletArticle: build.mutation({
+            query: (slug) => ({
+                url: `articles/${slug}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: [{ type: 'Articles', id: 'Articles-List' }],
         }),
     }),
 });
 
-export const { useGetArticlesQuery, useGetArticleItemQuery } = articlesApi;
+export const { useGetArticlesQuery, useGetArticleItemQuery, useAddNewArticleMutation, useDeletArticleMutation } =
+    articlesApi;

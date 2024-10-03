@@ -38,10 +38,6 @@ export default function SignUp() {
 
     const { handleSubmit, reset, setError } = form;
 
-    // setServises((prev) => ({ ...prev, error: true }));
-
-    // console.log(error);
-
     const onSubmit = async (data) => {
         const request = {
             user: { username: data.username, email: data.email, password: data.password },
@@ -93,8 +89,8 @@ export default function SignUp() {
                 <form action="" className="form" onSubmit={handleSubmit(onSubmit)}>
                     <LabelUser form={form} name="username" />
                     <Email form={form} name="email" />
-                    <Password form={form} name="password" />
-                    <Password form={form} name="repeatPassword" />
+                    <Password form={form} name="password" title="Password" />
+                    <Password form={form} name="repeatPassword" title="Repeat Password" />
                     <Checkbox form={form} name="toggle" />
                     <button type="submit" className="form__button">
                         Create

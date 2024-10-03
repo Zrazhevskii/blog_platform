@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Form.css';
 
-export default function Password({ form, name }) {
+export default function Password({ form, name, title }) {
     const {
         register,
         formState: { errors },
@@ -10,13 +10,13 @@ export default function Password({ form, name }) {
 
     return (
         <label htmlFor="password" className="form__label">
-            Password
+            {title}
             <input
                 {...register(name)}
                 type="password"
                 id={name}
                 className={`${'form__input'} ${errors?.[name] ? 'form__input_margin-top' : 'form__input_margin'}`}
-                placeholder="Password"
+                placeholder={title}
             />
             <div>{errors?.[name] && <p className="errors__text">{errors?.[name]?.message || 'Error'}</p>}</div>
         </label>
@@ -25,15 +25,16 @@ export default function Password({ form, name }) {
 
 Password.propTypes = {
     form: PropTypes.shape({
-        register: PropTypes.func,
+        register: PropTypes.func.isRequired,
         formState: PropTypes.shape({
             errors: PropTypes.shape({
                 password: PropTypes.shape({
-                    type: PropTypes.string,
-                    message: PropTypes.string,
+                    type: PropTypes.string.isRequired,
+                    message: PropTypes.string.isRequired,
                 }),
             }),
         }),
     }),
-    name: PropTypes.string,
+    name: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
 };

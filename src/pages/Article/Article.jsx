@@ -13,7 +13,7 @@ import Modal from '../../components/Modal/index';
 export default function Article() {
     const [showModal, setShowModal] = useState(false);
     const inAccount = useSelector((state) => state.articles.inAccount);
-    console.log(inAccount);
+    // console.log(inAccount);
     const { slug } = useParams();
     const { data, isLoading, isSuccess } = useGetArticleItemQuery(slug);
 

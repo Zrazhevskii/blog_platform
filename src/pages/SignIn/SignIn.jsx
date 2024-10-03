@@ -55,7 +55,7 @@ export default function SignIn() {
                 <span className="registration__form__title registration__form__title_margin-bottom">Sign In</span>
                 <form action="" className="form" onSubmit={handleSubmit(onSubmit)}>
                     <Email form={form} name="email" />
-                    <Password form={form} name="password" />
+                    <Password form={form} name="password" title="Password" />
                     <button type="submit" className="form__button">
                         Login
                     </button>

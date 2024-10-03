@@ -1,18 +1,52 @@
 // import { useState } from 'react';
-import './NewArticle.css';
 import { useFieldArray, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useNavigate } from 'react-router-dom';
+import { shemaNewArticle } from '../../components/Form/formSchema';
+import { useAddNewArticleMutation } from '../../servises/articlesApi';
+import './NewArticle.css';
 
 export default function NewArticle() {
-    // const [tags, setTags] = useState([]);
-    const { register, control, handleSubmit, formState } = useForm({
+    const navigate = useNavigate();
+    const [addNewArticle] = useAddNewArticleMutation();
+    const {
+        register,
+        control,
+        handleSubmit,
+        reset,
+        formState: { errors },
+    } = useForm({
+        mode: 'onChange',
+        resolver: yupResolver(shemaNewArticle),
         defaultValues: {
-            title: '',
-            shotDiscribe: '',
-            text: '',
             tags: [{ number: '' }],
         },
     });
-    // const { errors } = formState;
+
+    const onSubmit = async (data) => {
+        // const res = data.tags.slice(0, -1).map((item) => item.number);
+        // console.log(res, data.tags.slice(0, -1));
+        const response = {
+            article: {
+                title: data.title,
+                description: data.shortDescription,
+                body: data.text,
+                tagList: data.tags.slice(0, -1).map((item) => item.number),
+            },
+        };
+
+        await addNewArticle(response)
+            .unwrap()
+            .then((payload) => {
+                console.log('это payload - ', payload);
+                reset();
+                navigate('/');
+            })
+            .catch((err) => {
+                console.log('это err - ', err);
+            });
+        // console.log(response);
+    };
 
     const { fields, append, remove } = useFieldArray({
         name: 'tags',
@@ -21,32 +55,42 @@ export default function NewArticle() {
     return (
         <section className="new-article">
             <span className="new-article__title">Create new article</span>
-            <form className="new-article__form">
+            <form className="new-article__form" onSubmit={handleSubmit(onSubmit)}>
                 <label htmlFor="title" className="new-article__label">
                     Title
                     <input
+                        {...register('title')}
                         type="text"
                         id="title"
-                        className="new-article__input new-article__input_style"
+                        className={`${'new-article__input'} ${errors?.title ? 'new-article__input_error' : 'new-article__input_margin'}`}
                         placeholder="Title"
                     />
+                    <div>{errors?.title && <p className="errors__text">{errors?.title?.message || 'Error'}</p>}</div>
                 </label>
                 <label htmlFor="description" className="new-article__label">
-                    Shot description
+                    Short description
                     <input
+                        {...register('shortDescription')}
                         type="text"
                         id="description"
-                        className="new-article__input new-article__input_style"
+                        className={`${'new-article__input'} ${errors?.shortDescription ? 'new-article__input_error' : 'new-article__input_margin'}`}
                         placeholder="Title"
                     />
+                    <div>
+                        {errors?.shortDescription && (
+                            <p className="errors__text">{errors?.shortDescription?.message || 'Error'}</p>
+                        )}
+                    </div>
                 </label>
                 <label htmlFor="textarea" className="new-article__label-title">
                     Text
                     <textarea
+                        {...register('text')}
                         id="textarea"
-                        className="new-article__textarea new-article__textarea_style"
+                        className={`${'new-article__textarea'} ${errors?.text ? 'new-article__textarea_error' : 'new-article__textarea_margin'}`}
                         placeholder="Text"
                     />
+                    <div>{errors?.text && <p className="errors__text">{errors?.text?.message || 'Error'}</p>}</div>
                 </label>
                 <div className="tags">
                     <div className="tags__box">
@@ -65,7 +109,7 @@ export default function NewArticle() {
                                             type="button"
                                             className="tags__btn-del"
                                             onClick={() => {
-                                                if (index === 0) return;
+                                                if (field.id === fields.slice(-1)[0].id) return;
                                                 remove(index);
                                             }}
                                         >
@@ -77,11 +121,14 @@ export default function NewArticle() {
                         </label>
                     </div>
                     <div className="tags__btn-box">
-                        <button type="button" onClick={() => append({ number: '' })} className="tags__btn-add">
+                        <button type="button" onClick={() => append()} className="tags__btn-add">
                             Add tag
                         </button>
                     </div>
                 </div>
+                <button type="submit" className="new-article__submit">
+                    Send
+                </button>
             </form>
         </section>
     );

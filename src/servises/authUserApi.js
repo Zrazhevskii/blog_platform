@@ -28,6 +28,7 @@ export const authUserApi = articlesApi.injectEndpoints({
                 method: 'POST',
                 body,
             }),
+            providesTags: ['User'],
         }),
     }),
 });

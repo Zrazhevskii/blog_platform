@@ -1,10 +1,20 @@
 // import React from 'react'
-import './Modal.css';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
+import { useDeletArticleMutation } from '../../servises/articlesApi';
+import './Modal.css';
 
 export default function Modal({ slug, handleChangeShowModal }) {
-    const handleDeletAticle = () => {
-        console.log(slug);
+    const navigate = useNavigate();
+    const [deletArticle] = useDeletArticleMutation();
+    const handleDeletAticle = async () => {
+        await deletArticle(slug)
+            .then(() => {
+                navigate('/');
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     };
     return (
         <div className="modal">
