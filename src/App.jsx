@@ -9,6 +9,7 @@ import ArticlesList from './components/ArticlesList/index';
 import Article from './pages/Article/index';
 import NewArticle from './pages/NewArticle/index';
 import Profile from './pages/Profile/index';
+import EditArticle from './pages/EditArticle/index';
 
 function App() {
     return (
@@ -18,6 +19,7 @@ function App() {
                 <Route path="articles/:slug" element={<Article />} />
                 <Route path="new-article" element={<NewArticle />} />
                 <Route path="profile" element={<Profile />} />
+                <Route path="articles/:slug/edit" element={<EditArticle />} />
                 <Route path="sign-up" element={<SignUp />} />
                 <Route path="sign-in" element={<SignIn />} />
                 <Route path="*" element={<PageNotFound />} />

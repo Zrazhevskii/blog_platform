@@ -3,9 +3,9 @@ import './SignUp.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Alert } from 'antd';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { toggleInAccount } from '../../redusers/ArticlesListReduser';
+// import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleInAccount, toggleSucces, toggleError } from '../../redusers/ArticlesListReduser';
 import LabelUser from '../../components/Form/LabelUser';
 import Email from '../../components/Form/Email';
 import Password from '../../components/Form/Password';
@@ -14,24 +14,26 @@ import { schemaSighUp } from '../../components/Form/formSchema';
 import { useRegisterUserMutation } from '../../servises/authUserApi';
 
 export default function SignUp() {
+    const { succes, error } = useSelector((state) => state.articles);
     const dispatch = useDispatch();
     const [registerUser] = useRegisterUserMutation();
     const navigate = useNavigate();
-    const [servises, setServises] = useState({
-        succes: false,
-        error: false,
-    });
+    // const [servises, setServises] = useState({
+    //     succes: false,
+    //     error: false,
+    // });
 
-    const { succes, error } = servises;
+    // const { succes, error } = servises;
     const form = useForm({
         mode: 'onChange',
         resolver: yupResolver(schemaSighUp),
     });
 
-    const chengeHeader = () => {
+    const changeHeader = () => {
         setTimeout(() => {
             dispatch(toggleInAccount(true));
-            setServises((prev) => ({ ...prev, succes: false }));
+            toggleSucces(false);
+            // setServises((prev) => ({ ...prev, succes: false }));
             navigate('/');
         }, 2000);
     };
@@ -46,8 +48,9 @@ export default function SignUp() {
             .unwrap()
             .then((payload) => {
                 localStorage.setItem('token', payload.user.token);
-                setServises((prev) => ({ ...prev, succes: true }));
-                chengeHeader();
+                toggleSucces(true);
+                // setServises((prev) => ({ ...prev, succes: true }));
+                changeHeader();
                 reset();
             })
             .catch((err) => {
@@ -60,7 +63,8 @@ export default function SignUp() {
                     });
                 }
                 if (err.status >= 500) {
-                    setServises((prev) => ({ ...prev, error: true }));
+                    toggleError(true);
+                    // setServises((prev) => ({ ...prev, error: true }));
                 }
             });
     };

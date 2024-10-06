@@ -1,4 +1,3 @@
-// import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { articlesApi } from './articlesApi';
 
 export const authUserApi = articlesApi.injectEndpoints({
@@ -30,7 +29,22 @@ export const authUserApi = articlesApi.injectEndpoints({
             }),
             providesTags: ['User'],
         }),
+        updateUser: builder.mutation({
+            query(body) {
+                // console.log(body);
+                return { url: 'user', method: 'PUT', body };
+            },
+            invalidatesTags: ['User'],
+            // transformResponse: (response) => {
+            //     console.log(response);
+            // },
+            transformErrorResponse(error) {
+                console.log(error);
+            },
+        }),
     }),
+    overrideExisting: 'throw',
 });
 
-export const { useRegisterUserMutation, useGetCurrentUserQuery, useGetExistingUserMutation } = authUserApi;
+export const { useRegisterUserMutation, useGetCurrentUserQuery, useGetExistingUserMutation, useUpdateUserMutation } =
+    authUserApi;

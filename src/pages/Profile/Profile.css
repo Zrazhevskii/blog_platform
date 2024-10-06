@@ -22,3 +22,9 @@
 
     margin-bottom: 21px;
 }
+
+.errors {
+    position: absolute;
+    left: 300px;
+    width: 700px;
+}

@@ -1,5 +1,5 @@
 // import React from 'react';
-import { NavLink, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { PuffLoader } from 'react-spinners';
 import { format } from 'date-fns';
 import { v4 as uuidv4 } from 'uuid';
@@ -39,9 +39,7 @@ export default function Article() {
                 <div className="post__box">
                     <div className="post__box__content">
                         <div className="post__box__title-box">
-                            <NavLink to="/article" className="post__box__title">
-                                {title}
-                            </NavLink>
+                            <span className="post__box__title">{title}</span>
                             <div className="post__box__favorites">{favoritesCount}</div>
                         </div>
                         <div className="post__box__tags-box">
@@ -75,9 +73,9 @@ export default function Article() {
                                     Delete
                                 </button>
                                 {showModal && <Modal slug={slug} handleChangeShowModal={handleChangeShowModal} />}
-                                <button type="button" className="box__btns__edit">
+                                <Link to={`/articles/${slug}/edit`} className="box__btns__edit">
                                     Edit
-                                </button>
+                                </Link>
                             </div>
                         )}
                     </div>
