@@ -52,9 +52,9 @@ export default function Profile() {
         //     image: '',
         //     password: 'qazwsx',
         // };
-        console.log(request);
+        // console.log(request);
 
-        await updateUser({ ...request })
+        await updateUser(request)
             .unwrap()
             .then((payload) => {
                 console.log('это payload - ', payload);

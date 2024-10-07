@@ -64,6 +64,20 @@ export const articlesApi = createApi({
             },
             invalidatesTags: (result) => [{ type: 'Articles', id: result?.article.slug }, 'Article'],
         }),
+        addFavorite: build.mutation({
+            query: (slug) => ({
+                url: `articles/${slug}/favorite`,
+                method: 'POST',
+            }),
+            invalidatesTags: (result) => [{ type: 'Articles', id: result?.article.slug }, 'Article'],
+        }),
+        deletFavorite: build.mutation({
+            query: (slug) => ({
+                url: `articles/${slug}/favorite`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: (result) => [{ type: 'Articles', id: result?.article.slug }, 'Article'],
+        }),
     }),
 });
 
@@ -73,4 +87,6 @@ export const {
     useAddNewArticleMutation,
     useDeletArticleMutation,
     useEditArticleMutation,
+    useAddFavoriteMutation,
+    useDeletFavoriteMutation,
 } = articlesApi;

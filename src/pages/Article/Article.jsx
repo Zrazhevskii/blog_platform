@@ -1,8 +1,6 @@
-// import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { PuffLoader } from 'react-spinners';
 import { format } from 'date-fns';
-import { v4 as uuidv4 } from 'uuid';
 import './Article.css';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -10,6 +8,7 @@ import { changeUserName } from '../../helpers/changeUserName';
 import { useGetArticleItemQuery } from '../../servises/articlesApi';
 import Modal from '../../components/Modal/index';
 import { useGetCurrentUserQuery } from '../../servises/authUserApi';
+import ArticleTitleBox from '../../components/ArticleTitleBox';
 
 export default function Article() {
     const [showModal, setShowModal] = useState(false);
@@ -30,7 +29,7 @@ export default function Article() {
         setShowModal(bool);
     };
 
-    const { title, favoritesCount, body, tagList, description, createdAt, author } = data.article;
+    const { body, createdAt, author } = data.article;
     const { username, image } = author;
     const date = createdAt ? format(createdAt, 'MMMM dd, yyyy') : 'Дата неуказана';
 
@@ -38,24 +37,7 @@ export default function Article() {
         isSuccess && (
             <section className="article__wrapper">
                 <div className="post__box">
-                    <div className="post__box__content">
-                        <div className="post__box__title-box">
-                            <span className="post__box__title">{title}</span>
-                            <div className="post__box__favorites">{favoritesCount}</div>
-                        </div>
-                        <div className="post__box__tags-box">
-                            {tagList?.length
-                                ? tagList.map((item) => {
-                                      return (
-                                          <span key={uuidv4()} className="post__box__tag">
-                                              {item}
-                                          </span>
-                                      );
-                                  })
-                                : 'без тегов'}
-                        </div>
-                        <div className="post__box__description">{description}</div>
-                    </div>
+                    <ArticleTitleBox elem={data.article} />
                     <div className="post__box__author-wrapper">
                         <div className="post__box__author-box post__box__author-box_width">
                             <div className="post__box__name-box">

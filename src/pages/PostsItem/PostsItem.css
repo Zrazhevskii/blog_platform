@@ -40,12 +40,35 @@
     color: #1890ff;
 }
 
-.post__box__favorites {
+.post__box__btn {
     display: flex;
     justify-content: center;
     align-items: center;
 
-    width: 13%;
+    width: 40px;
+    height: 22px;
+
+    margin-left: 20px;
+    padding-top: 7px;
+
+    border: none;
+    background-color: #fff;
+}
+
+.post__box__btn:hover {
+    cursor: pointer;
+}
+
+.post__box__unfavorites::before {
+    content: '';
+
+    width: 17px;
+    height: 17px;
+
+    background: no-repeat url('../../assets/heart.png');
+
+    position: relative;
+    left: -5px;
 }
 
 .post__box__favorites::before {
@@ -54,7 +77,7 @@
     width: 17px;
     height: 17px;
 
-    background: no-repeat url('../../assets/heart.png');
+    background: no-repeat url('../../assets/path.png');
 
     position: relative;
     left: -5px;

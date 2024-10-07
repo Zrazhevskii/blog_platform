@@ -30,10 +30,11 @@ export const authUserApi = articlesApi.injectEndpoints({
             providesTags: ['User'],
         }),
         updateUser: builder.mutation({
-            query(body) {
-                // console.log(body);
-                return { url: 'user', method: 'PUT', body };
-            },
+            query: (body) => ({
+                url: 'user',
+                method: 'PUT',
+                body,
+            }),
             invalidatesTags: ['User'],
             // transformResponse: (response) => {
             //     console.log(response);
