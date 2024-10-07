@@ -9,7 +9,8 @@ export default function EditArticle() {
     // const {}
     // const { data, isLoading, isSuccess } = useGetArticleItemQuery(slug);
     const { data } = useGetArticleItemQuery(slug);
-    console.log(data);
+    // const { article } = data;
+    // console.log(data.article.title);
 
-    return <NewArticle />;
+    return <NewArticle article={data ? data.article : {}} />;
 }

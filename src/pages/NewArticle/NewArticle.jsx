@@ -1,31 +1,37 @@
-// import { useState } from 'react';
+import PropTypes from 'prop-types';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
 import { shemaNewArticle } from '../../components/Form/formSchema';
-import { useAddNewArticleMutation } from '../../servises/articlesApi';
+import { useAddNewArticleMutation, useEditArticleMutation } from '../../servises/articlesApi';
 import './NewArticle.css';
 
-export default function NewArticle() {
+export default function NewArticle({ article = {} }) {
+    // console.log(article);
+    const { slug } = article;
     const navigate = useNavigate();
     const [addNewArticle] = useAddNewArticleMutation();
+    const [editArticle] = useEditArticleMutation();
+    const form = useForm({
+        mode: 'onChange',
+        resolver: yupResolver(shemaNewArticle),
+        defaultValues: {
+            title: article?.title || '',
+            shortDescription: article?.description || '',
+            text: article?.body || '',
+            tags: article?.tagList?.map((tag) => ({ number: tag })) || [{ number: '' }],
+        },
+    });
     const {
         register,
         control,
         handleSubmit,
         reset,
         formState: { errors },
-    } = useForm({
-        mode: 'onChange',
-        resolver: yupResolver(shemaNewArticle),
-        defaultValues: {
-            tags: [{ number: '' }],
-        },
-    });
+    } = form;
 
     const onSubmit = async (data) => {
-        // const res = data.tags.slice(0, -1).map((item) => item.number);
-        // console.log(res, data.tags.slice(0, -1));
+        console.log('я в сабмите');
         const response = {
             article: {
                 title: data.title,
@@ -34,27 +40,42 @@ export default function NewArticle() {
                 tagList: data.tags.slice(0, -1).map((item) => item.number),
             },
         };
-
-        await addNewArticle(response)
-            .unwrap()
-            .then((payload) => {
-                console.log('это payload - ', payload);
-                reset();
-                navigate('/');
-            })
-            .catch((err) => {
-                console.log('это err - ', err);
-            });
-        // console.log(response);
+        if (!article.title) {
+            console.log('я в создании');
+            await addNewArticle(response)
+                .unwrap()
+                .then((payload) => {
+                    console.log('это payload - ', payload);
+                    reset();
+                    navigate('/');
+                })
+                .catch((err) => {
+                    console.log('это err - ', err);
+                });
+        } else {
+            console.log('я в изменении');
+            console.log({ response, slug });
+            await editArticle({ response, slug })
+                .unwrap()
+                .then((payload) => {
+                    console.log('это payload - ', payload);
+                    reset();
+                    navigate('/');
+                })
+                .catch((err) => {
+                    console.log('это err - ', err);
+                });
+        }
     };
 
     const { fields, append, remove } = useFieldArray({
         name: 'tags',
         control,
     });
+
     return (
         <section className="new-article">
-            <span className="new-article__title">Create new article</span>
+            <span className="new-article__title">{article.title ? 'Edit title' : 'Create new article'}</span>
             <form className="new-article__form" onSubmit={handleSubmit(onSubmit)}>
                 <label htmlFor="title" className="new-article__label">
                     Title
@@ -133,3 +154,9 @@ export default function NewArticle() {
         </section>
     );
 }
+
+NewArticle.propTypes = {
+    article: PropTypes.shape({
+        title: PropTypes.string,
+    }),
+};

@@ -36,11 +36,14 @@ export const articlesApi = createApi({
             providesTags: ['Article'],
         }),
         addNewArticle: build.mutation({
-            query: (body) => ({
-                url: 'articles',
-                method: 'POST',
-                body,
-            }),
+            query(body) {
+                console.log(body);
+                return {
+                    url: 'articles',
+                    method: 'POST',
+                    body,
+                };
+            },
             invalidatesTags: [{ type: 'Articles', id: 'Articles-List' }],
         }),
         deletArticle: build.mutation({
@@ -50,8 +53,24 @@ export const articlesApi = createApi({
             }),
             invalidatesTags: [{ type: 'Articles', id: 'Articles-List' }],
         }),
+        editArticle: build.mutation({
+            query(response) {
+                const { response: body, slug } = response;
+                return {
+                    url: `articles/${slug}`,
+                    method: 'PUT',
+                    body,
+                };
+            },
+            invalidatesTags: (result) => [{ type: 'Articles', id: result?.article.slug }, 'Article'],
+        }),
     }),
 });
 
-export const { useGetArticlesQuery, useGetArticleItemQuery, useAddNewArticleMutation, useDeletArticleMutation } =
-    articlesApi;
+export const {
+    useGetArticlesQuery,
+    useGetArticleItemQuery,
+    useAddNewArticleMutation,
+    useDeletArticleMutation,
+    useEditArticleMutation,
+} = articlesApi;
