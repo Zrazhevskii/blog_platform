@@ -16,7 +16,7 @@ export const authUserApi = articlesApi.injectEndpoints({
             }),
             providesTags: ['User'],
             transformResponse: (result) => {
-                console.log(result);
+                // console.log(result);
                 const { username, email, image = '' } = result.user;
                 return { username, email, image };
             },

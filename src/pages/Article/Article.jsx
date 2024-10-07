@@ -9,13 +9,14 @@ import { useSelector } from 'react-redux';
 import { changeUserName } from '../../helpers/changeUserName';
 import { useGetArticleItemQuery } from '../../servises/articlesApi';
 import Modal from '../../components/Modal/index';
+import { useGetCurrentUserQuery } from '../../servises/authUserApi';
 
 export default function Article() {
     const [showModal, setShowModal] = useState(false);
     const inAccount = useSelector((state) => state.articles.inAccount);
-    // console.log(inAccount);
     const { slug } = useParams();
     const { data, isLoading, isSuccess } = useGetArticleItemQuery(slug);
+    const { data: dataUser } = useGetCurrentUserQuery();
 
     if (isLoading) {
         return (
@@ -63,7 +64,7 @@ export default function Article() {
                             </div>
                             <img src={image} alt="автор" className="post__box__img" />
                         </div>
-                        {inAccount && (
+                        {inAccount && dataUser.username === username && (
                             <div className="box__btns">
                                 <button
                                     type="button"

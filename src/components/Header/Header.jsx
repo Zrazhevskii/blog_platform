@@ -10,6 +10,7 @@ export default function Header() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { data } = useGetCurrentUserQuery();
+    // console.log(data);
     const storage = localStorage.getItem('token');
     const inAccount = useSelector((state) => state.articles.inAccount);
     useEffect(() => {
