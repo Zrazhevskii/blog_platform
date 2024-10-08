@@ -20,6 +20,7 @@ const ArticlesListReduser = createSlice({
             state.inAccount = payload;
         },
         toggleSucces: (state, { payload }) => {
+            console.log(payload);
             // eslint-disable-next-line no-param-reassign
             state.succes = payload;
         },

@@ -35,7 +35,7 @@ export default function Article() {
 
     return (
         isSuccess && (
-            <section className="article__wrapper">
+            <section className="article">
                 <div className="post__box">
                     <ArticleTitleBox elem={data.article} />
                     <div className="post__box__author-wrapper">

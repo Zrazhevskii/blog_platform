@@ -4,10 +4,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
 import { shemaNewArticle } from '../../components/Form/formSchema';
 import { useAddNewArticleMutation, useEditArticleMutation } from '../../servises/articlesApi';
-import './NewArticle.css';
+import classes from './NewArticle.module.scss';
 
 export default function NewArticle({ article = {} }) {
-    // console.log(article);
     const { slug } = article;
     const navigate = useNavigate();
     const [addNewArticle] = useAddNewArticleMutation();
@@ -31,7 +30,6 @@ export default function NewArticle({ article = {} }) {
     } = form;
 
     const onSubmit = async (data) => {
-        // console.log('я в сабмите');
         const response = {
             article: {
                 title: data.title,
@@ -41,11 +39,9 @@ export default function NewArticle({ article = {} }) {
             },
         };
         if (!article.title) {
-            // console.log('я в создании');
             await addNewArticle(response)
                 .unwrap()
                 .then(() => {
-                    // console.log('это payload - ', payload);
                     reset();
                     navigate('/');
                 })
@@ -53,8 +49,6 @@ export default function NewArticle({ article = {} }) {
                     console.log('это err - ', err);
                 });
         } else {
-            // console.log('я в изменении');
-            // console.log({ response, slug });
             await editArticle({ response, slug })
                 .unwrap()
                 .then(() => {
@@ -74,61 +68,65 @@ export default function NewArticle({ article = {} }) {
     });
 
     return (
-        <section className="new-article">
-            <span className="new-article__title">{article.title ? 'Edit title' : 'Create new article'}</span>
-            <form className="new-article__form" onSubmit={handleSubmit(onSubmit)}>
-                <label htmlFor="title" className="new-article__label">
+        <section className={classes.newArticle}>
+            <span className={classes.newArticle__title}>{article.title ? 'Edit title' : 'Create new article'}</span>
+            <form className={classes.newArticle__form} onSubmit={handleSubmit(onSubmit)}>
+                <label htmlFor="title" className={classes.newArticle__label}>
                     Title
                     <input
                         {...register('title')}
                         type="text"
                         id="title"
-                        className={`${'new-article__input'} ${errors?.title ? 'new-article__input_error' : 'new-article__input_margin'}`}
+                        className={`${classes.newArticle__input} ${errors?.title ? classes.newArticle__input_error : classes.newArticle__input_margin}`}
                         placeholder="Title"
                     />
-                    <div>{errors?.title && <p className="errors__text">{errors?.title?.message || 'Error'}</p>}</div>
+                    <div>
+                        {errors?.title && <p className={classes.errors__text}>{errors?.title?.message || 'Error'}</p>}
+                    </div>
                 </label>
-                <label htmlFor="description" className="new-article__label">
+                <label htmlFor="description" className={classes.newArticle__label}>
                     Short description
                     <input
                         {...register('shortDescription')}
                         type="text"
                         id="description"
-                        className={`${'new-article__input'} ${errors?.shortDescription ? 'new-article__input_error' : 'new-article__input_margin'}`}
+                        className={`${classes.newArticle__input} ${errors?.title ? classes.newArticle__input_error : classes.newArticle__input_margin}`}
                         placeholder="Title"
                     />
                     <div>
                         {errors?.shortDescription && (
-                            <p className="errors__text">{errors?.shortDescription?.message || 'Error'}</p>
+                            <p className={classes.errors__text}>{errors?.shortDescription?.message || 'Error'}</p>
                         )}
                     </div>
                 </label>
-                <label htmlFor="textarea" className="new-article__label-title">
+                <label htmlFor="textarea" className={classes.newArticle__labelTitle}>
                     Text
                     <textarea
                         {...register('text')}
                         id="textarea"
-                        className={`${'new-article__textarea'} ${errors?.text ? 'new-article__textarea_error' : 'new-article__textarea_margin'}`}
+                        className={`${classes.newArticle__textarea} ${errors?.text ? classes.newArticle__textarea_error : classes.newArticle__textarea_margin}`}
                         placeholder="Text"
                     />
-                    <div>{errors?.text && <p className="errors__text">{errors?.text?.message || 'Error'}</p>}</div>
+                    <div>
+                        {errors?.text && <p className={classes.errors__text}>{errors?.text?.message || 'Error'}</p>}
+                    </div>
                 </label>
-                <div className="tags">
-                    <div className="tags__box">
-                        <label htmlFor={`tags.${[0]}.number`} className="tags__label">
+                <div className={classes.tags}>
+                    <div className={classes.tags__box}>
+                        <label htmlFor={`tags.${[0]}.number`} className={classes.tags__label}>
                             Tags
                             {fields.map((field, index) => {
                                 return (
-                                    <div className="tags__item" key={field.id}>
+                                    <div className={classes.tags__item} key={field.id}>
                                         <input
                                             type="text"
                                             id={`tags.${index}.number`}
                                             {...register(`tags.${index}.number`)}
-                                            className="tags__input"
+                                            className={classes.tags__input}
                                         />
                                         <button
                                             type="button"
-                                            className="tags__btn-del"
+                                            className={classes.tags__btnDel}
                                             onClick={() => {
                                                 if (field.id === fields.slice(-1)[0].id) return;
                                                 remove(index);
@@ -141,13 +139,13 @@ export default function NewArticle({ article = {} }) {
                             })}
                         </label>
                     </div>
-                    <div className="tags__btn-box">
-                        <button type="button" onClick={() => append()} className="tags__btn-add">
+                    <div className={classes.tags__btnBox}>
+                        <button type="button" onClick={() => append()} className={classes.tags__btnAdd}>
                             Add tag
                         </button>
                     </div>
                 </div>
-                <button type="submit" className="new-article__submit">
+                <button type="submit" className={classes.newArticle__submit}>
                     Send
                 </button>
             </form>

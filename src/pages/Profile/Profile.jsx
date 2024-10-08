@@ -10,15 +10,15 @@ import Email from '../../components/Form/Email';
 import { shemaProfile } from '../../components/Form/formSchema';
 import Password from '../../components/Form/Password';
 import { useGetCurrentUserQuery, useUpdateUserMutation } from '../../servises/authUserApi';
-// import { toggleError, toggleSucces } from '../../redusers/ArticlesListReduser';
 import { toggleError, toggleSucces } from '../../redusers/ArticlesListReduser';
 
 export default function Profile() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { succes, error } = useSelector((state) => state.articles);
+    const succes = useSelector((state) => state.articles.succes);
+    const error = useSelector((state) => state.articles.error);
     const { data } = useGetCurrentUserQuery();
-    const [updateUser] = useUpdateUserMutation();
+    const [updateUser, { isSuccess }] = useUpdateUserMutation();
     const form = useForm({
         mode: 'onChange',
         resolver: yupResolver(shemaProfile),
@@ -32,8 +32,10 @@ export default function Profile() {
     } = form;
 
     const changeHeader = () => {
+        // console.log(succes);
         setTimeout(() => {
             console.log(succes);
+            console.log(isSuccess);
             dispatch(toggleSucces(false));
             navigate('/');
         }, 1000);
@@ -51,7 +53,7 @@ export default function Profile() {
             .unwrap()
             .then(() => {
                 dispatch(toggleSucces(true));
-                console.log(succes);
+                console.log(isSuccess);
                 changeHeader();
             })
             .catch((err) => {
@@ -82,16 +84,16 @@ export default function Profile() {
                     <Alert message="Success!" type="success" description="Вы успешно изменили профиль!" showIcon />
                 </section>
             )}
-            <section className="errors">
-                {error && (
+            {error && (
+                <section className="errors">
                     <Alert
                         message="Error!"
                         type="error"
                         description="Что-то пошло не так, перегрузите страницу..."
                         showIcon
                     />
-                )}
-            </section>
+                </section>
+            )}
             <span className="profile__title">Edit Profile</span>
             <form className="form">
                 <LabelUser form={form} name="username" />
@@ -110,7 +112,7 @@ export default function Profile() {
                         {errors?.urlAvatar && <p className="errors__text">{errors?.urlAvatar?.message || 'Error'}</p>}
                     </div>
                 </label>
-                <button type="submit" className="form__button" onClick={handleSubmit(onSubmit)}>
+                <button type="submit" className="form__button form__button_margin" onClick={handleSubmit(onSubmit)}>
                     Save
                 </button>
             </form>

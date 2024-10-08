@@ -1,9 +1,10 @@
 .profile {
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
 
     width: 384px;
-    height: 498px;
+    min-height: 498px;
 
     margin: auto;
     margin-top: 59px;
@@ -25,7 +26,7 @@
 
 .profile__popup {
     position: absolute;
-    top: -60px;
+    top: 90px;
     left: 470px;
 }
 
@@ -33,4 +34,8 @@
     position: absolute;
     left: 300px;
     width: 700px;
+}
+
+.form__button_margin {
+    margin-top: 14px;
 }

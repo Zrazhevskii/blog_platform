@@ -1,6 +1,6 @@
 @import '../PostsItem/PostsItem.css';
 
-.article__wrapper {
+.article {
     display: grid;
     grid-template-rows: 140px 1fr ;
     box-sizing: border-box;
