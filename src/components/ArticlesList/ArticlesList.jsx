@@ -1,7 +1,7 @@
-import './ArticlesList.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { Alert, Pagination } from 'antd';
 import { PuffLoader } from 'react-spinners';
+import classes from './ArticlesList.module.scss';
 import { useGetArticlesQuery } from '../../servises/articlesApi';
 import { toggleCurrentPage } from '../../redusers/ArticlesListReduser';
 import PostsItem from '../../pages/PostsItem/PostsItem';
@@ -27,12 +27,12 @@ export default function ArticlesList() {
 
     return (
         <>
-            <main className="posts__list">
+            <main className={classes.posts__list}>
                 {data?.articles.map((elem) => {
                     return <PostsItem elem={elem} key={elem.updatedAt} />;
                 })}
             </main>
-            <div className="post__list__pagination">
+            <div className={classes.posts__list__pagination}>
                 <Pagination
                     showSizeChanger={false}
                     defaultCurrent={currentPage}

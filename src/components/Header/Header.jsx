@@ -9,10 +9,14 @@ import { toggleInAccount } from '../../redusers/ArticlesListReduser';
 export default function Header() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { data } = useGetCurrentUserQuery();
+    const inAccount = useSelector((state) => state.articles.inAccount);
+    const { data } = useGetCurrentUserQuery(undefined, {
+        skip: !inAccount,
+        refetchOnMountOrArgChange: true,
+    });
     // console.log(data);
     const storage = localStorage.getItem('token');
-    const inAccount = useSelector((state) => state.articles.inAccount);
+    // console.log(storage);
     useEffect(() => {
         if (storage) {
             dispatch(toggleInAccount(true));
@@ -35,9 +39,9 @@ export default function Header() {
                         <Link to="/profile" className="header__link header__link_profile-style">
                             {data?.username}
                         </Link>
-                        <div className="header__image">
-                            <img src={data?.image || imgProfile} alt="profile" />
-                        </div>
+                        <Link to="/profile" className="header__image-box">
+                            <img src={data?.image || imgProfile} alt="profile" className="header__image" />
+                        </Link>
                         <button
                             type="button"
                             className="header__logout"

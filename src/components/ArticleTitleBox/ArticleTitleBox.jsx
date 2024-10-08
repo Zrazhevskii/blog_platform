@@ -8,10 +8,11 @@ export default function ArticleTitleBox({ elem, isArticle = true }) {
     const [addFavorite] = useAddFavoriteMutation();
     const [deletFavorite] = useDeletFavoriteMutation();
     const { slug, title, favoritesCount, tagList, description, favorited } = elem;
+
     const toggleFavorite = () => {
         if (!favorited) {
             addFavorite(slug);
-            console.log(elem);
+            // console.log(elem);
         } else {
             deletFavorite(slug);
         }

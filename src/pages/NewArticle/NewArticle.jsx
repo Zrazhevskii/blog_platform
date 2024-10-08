@@ -31,7 +31,7 @@ export default function NewArticle({ article = {} }) {
     } = form;
 
     const onSubmit = async (data) => {
-        console.log('я в сабмите');
+        // console.log('я в сабмите');
         const response = {
             article: {
                 title: data.title,
@@ -41,11 +41,11 @@ export default function NewArticle({ article = {} }) {
             },
         };
         if (!article.title) {
-            console.log('я в создании');
+            // console.log('я в создании');
             await addNewArticle(response)
                 .unwrap()
-                .then((payload) => {
-                    console.log('это payload - ', payload);
+                .then(() => {
+                    // console.log('это payload - ', payload);
                     reset();
                     navigate('/');
                 })
@@ -53,17 +53,17 @@ export default function NewArticle({ article = {} }) {
                     console.log('это err - ', err);
                 });
         } else {
-            console.log('я в изменении');
-            console.log({ response, slug });
+            // console.log('я в изменении');
+            // console.log({ response, slug });
             await editArticle({ response, slug })
                 .unwrap()
-                .then((payload) => {
-                    console.log('это payload - ', payload);
+                .then(() => {
+                    // console.log('это payload - ', payload);
                     reset();
                     navigate('/');
                 })
-                .catch((err) => {
-                    console.log('это err - ', err);
+                .catch(() => {
+                    // console.log('это err - ', err);
                 });
         }
     };

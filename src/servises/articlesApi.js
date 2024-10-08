@@ -37,7 +37,7 @@ export const articlesApi = createApi({
         }),
         addNewArticle: build.mutation({
             query(body) {
-                console.log(body);
+                // console.log(body);
                 return {
                     url: 'articles',
                     method: 'POST',

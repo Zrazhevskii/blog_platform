@@ -17,8 +17,8 @@ export const authUserApi = articlesApi.injectEndpoints({
             providesTags: ['User'],
             transformResponse: (result) => {
                 // console.log(result);
-                const { username, email, image = '' } = result.user;
-                return { username, email, image };
+                const { username, email, image = '', password = '' } = result.user;
+                return { username, email, image, password };
             },
         }),
         getExistingUser: builder.mutation({
@@ -27,7 +27,7 @@ export const authUserApi = articlesApi.injectEndpoints({
                 method: 'POST',
                 body,
             }),
-            providesTags: ['User'],
+            invalidatesTags: ['User'],
         }),
         updateUser: builder.mutation({
             query: (body) => ({
@@ -36,12 +36,6 @@ export const authUserApi = articlesApi.injectEndpoints({
                 body,
             }),
             invalidatesTags: ['User'],
-            // transformResponse: (response) => {
-            //     console.log(response);
-            // },
-            transformErrorResponse(error) {
-                console.log(error);
-            },
         }),
     }),
     overrideExisting: 'throw',

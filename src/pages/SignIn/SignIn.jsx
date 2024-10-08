@@ -22,20 +22,20 @@ export default function SignIn() {
 
     const onSubmit = async (data) => {
         const request = { user: { email: data.email, password: data.password } };
-        console.log(request);
+        // console.log(request);
         await getExistingUser(request)
             .unwrap()
             .then((payload) => {
-                console.log('fulfilled', payload);
+                // console.log('fulfilled', payload);
                 localStorage.setItem('token', payload.user.token);
                 dispatch(toggleInAccount(true));
                 reset();
                 navigate('/');
             })
             .catch((err) => {
-                console.log(err);
+                // console.log(err);
                 if (err.status === 422) {
-                    console.log('это err - ', err);
+                    // console.log('это err - ', err);
                     ['email', 'password'].forEach((field) => {
                         setError(field, {
                             type: 'server',

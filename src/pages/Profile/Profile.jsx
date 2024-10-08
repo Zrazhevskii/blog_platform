@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect } from 'react';
 import { Alert } from 'antd';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import LabelUser from '../../components/Form/LabelUser';
 import Email from '../../components/Form/Email';
@@ -11,10 +11,10 @@ import { shemaProfile } from '../../components/Form/formSchema';
 import Password from '../../components/Form/Password';
 import { useGetCurrentUserQuery, useUpdateUserMutation } from '../../servises/authUserApi';
 // import { toggleError, toggleSucces } from '../../redusers/ArticlesListReduser';
-import { toggleSucces } from '../../redusers/ArticlesListReduser';
+import { toggleError, toggleSucces } from '../../redusers/ArticlesListReduser';
 
 export default function Profile() {
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const { succes, error } = useSelector((state) => state.articles);
     const { data } = useGetCurrentUserQuery();
@@ -33,9 +33,9 @@ export default function Profile() {
 
     const changeHeader = () => {
         setTimeout(() => {
+            console.log(succes);
             dispatch(toggleSucces(false));
-            // setServises((prev) => ({ ...prev, succes: false }));
-            // navigate('/');
+            navigate('/');
         }, 1000);
     };
 
@@ -46,23 +46,15 @@ export default function Profile() {
             password: param.newPassword,
             image: param.urlAvatar,
         };
-        // const request = {
-        //     email: 'admin@yandex.com',
-        //     username: 'admin321',
-        //     image: '',
-        //     password: 'qazwsx',
-        // };
-        // console.log(request);
 
-        await updateUser(request)
+        await updateUser({ user: request })
             .unwrap()
-            .then((payload) => {
-                console.log('это payload - ', payload);
+            .then(() => {
+                dispatch(toggleSucces(true));
+                console.log(succes);
                 changeHeader();
             })
             .catch((err) => {
-                console.log('это err - ', err);
-                console.log('это err.status - ', err.status);
                 if (err.status === 422) {
                     Object.keys(err.data.errors).forEach((field) => {
                         setError(field, {
@@ -72,27 +64,24 @@ export default function Profile() {
                     });
                 }
                 if (err.status >= 500) {
-                    console.log('я внутри 500');
-                    console.log('это err - ', err);
-                    console.log('это err.status - ', err.status);
-                    // dispatch(toggleError(true));
+                    dispatch(toggleError(true));
                 }
             });
-        // navigate('/');
     };
 
     useEffect(() => {
         if (data?.username) form.setValue('username', data.username);
         if (data?.email) form.setValue('email', data.email);
-    }, [data?.username, data?.email, form]);
+        if (data?.password) form.setValue('urlAvatar', data.password);
+    }, [data?.username, data?.email, data?.password, form]);
 
     return (
         <section className="profile">
-            <section className="registration__form__popup">
-                {succes && (
+            {succes && (
+                <section className="profile__popup">
                     <Alert message="Success!" type="success" description="Вы успешно изменили профиль!" showIcon />
-                )}
-            </section>
+                </section>
+            )}
             <section className="errors">
                 {error && (
                     <Alert

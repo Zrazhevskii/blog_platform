@@ -96,11 +96,17 @@
     margin-right: 15px;
 }
 
-.header__image {
+.header__image-box {
     width: 46px;
     height: 46px;
 
     margin-right: 15px;
+}
+
+.header__image {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
 }
 
 .header__logout {
