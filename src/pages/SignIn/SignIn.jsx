@@ -33,9 +33,7 @@ export default function SignIn() {
                 navigate('/');
             })
             .catch((err) => {
-                // console.log(err);
                 if (err.status === 422) {
-                    // console.log('это err - ', err);
                     ['email', 'password'].forEach((field) => {
                         setError(field, {
                             type: 'server',

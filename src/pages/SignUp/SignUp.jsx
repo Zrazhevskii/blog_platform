@@ -18,12 +18,6 @@ export default function SignUp() {
     const dispatch = useDispatch();
     const [registerUser] = useRegisterUserMutation();
     const navigate = useNavigate();
-    // const [servises, setServises] = useState({
-    //     succes: false,
-    //     error: false,
-    // });
-
-    // const { succes, error } = servises;
     const form = useForm({
         mode: 'onChange',
         resolver: yupResolver(schemaSighUp),
@@ -32,8 +26,7 @@ export default function SignUp() {
     const changeHeader = () => {
         setTimeout(() => {
             dispatch(toggleInAccount(true));
-            toggleSucces(false);
-            // setServises((prev) => ({ ...prev, succes: false }));
+            dispatch(toggleSucces(false));
             navigate('/');
         }, 2000);
     };
@@ -48,8 +41,7 @@ export default function SignUp() {
             .unwrap()
             .then((payload) => {
                 localStorage.setItem('token', payload.user.token);
-                toggleSucces(true);
-                // setServises((prev) => ({ ...prev, succes: true }));
+                dispatch(toggleSucces(true));
                 changeHeader();
                 reset();
             })
@@ -63,8 +55,7 @@ export default function SignUp() {
                     });
                 }
                 if (err.status >= 500) {
-                    toggleError(true);
-                    // setServises((prev) => ({ ...prev, error: true }));
+                    dispatch(toggleError(true));
                 }
             });
     };

@@ -52,7 +52,6 @@ export default function NewArticle({ article = {} }) {
             await editArticle({ response, slug })
                 .unwrap()
                 .then(() => {
-                    // console.log('это payload - ', payload);
                     reset();
                     navigate('/');
                 })

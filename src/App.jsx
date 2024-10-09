@@ -1,15 +1,15 @@
 // import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
-import PageNotFound from './pages/PageNotFound/index';
-import Layout from './components/Layout/index';
+import PageNotFound from './pages/PageNotFound';
+import Layout from './components/Layout';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
-import ArticlesList from './components/ArticlesList/index';
-import Article from './pages/Article/index';
-import NewArticle from './pages/NewArticle/index';
-import Profile from './pages/Profile/index';
-import EditArticle from './pages/EditArticle/index';
+import ArticlesList from './components/ArticlesList';
+import Article from './pages/Article';
+import NewArticle from './pages/NewArticle';
+import Profile from './pages/Profile';
+import EditArticle from './pages/EditArticle';
 
 function App() {
     return (

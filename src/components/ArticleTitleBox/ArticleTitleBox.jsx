@@ -13,7 +13,6 @@ export default function ArticleTitleBox({ elem, isArticle = true }) {
     const toggleFavorite = () => {
         if (!favorited) {
             addFavorite(slug);
-            // console.log(elem);
         } else {
             deletFavorite(slug);
         }
