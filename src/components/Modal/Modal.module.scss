@@ -68,7 +68,7 @@
         }
         margin-right: 10px;
 
-        &__btnNodelete:hover {
+        &:hover {
             cursor: pointer;
             transform: scale(1.04);
         }
@@ -84,7 +84,7 @@
             radius: 5px;
         }
 
-        &__btnDelete:hover {
+        &:hover {
             cursor: pointer;
             transform: scale(1.04);
         }
