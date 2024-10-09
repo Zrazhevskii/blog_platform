@@ -1,7 +1,7 @@
 import { useNavigate, NavLink, Link } from 'react-router-dom';
-import './Header.css';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import classes from './Header.module.scss';
 import { useGetCurrentUserQuery } from '../../servises/authUserApi';
 import imgProfile from '../../assets/imgProfile.png';
 import { toggleInAccount } from '../../redusers/ArticlesListReduser';
@@ -24,27 +24,37 @@ export default function Header() {
     }, [storage, dispatch]);
 
     return (
-        <header className="header">
-            <div className="header__title-box">
-                <button type="button" className="header__title-text" onClick={() => navigate('/')}>
+        <header className={classes.header}>
+            <div className={classes.header__head}>
+                <button type="button" className={classes.header__head__title} onClick={() => navigate('/')}>
                     Realworld Blog
                 </button>
             </div>
-            <div className="header__links-box">
+            <div className={classes.header__links}>
                 {inAccount ? (
                     <>
-                        <Link to="/new-article" className="header__link header__link_create-style">
+                        <Link
+                            to="/new-article"
+                            className={`${classes.header__links__link} ${classes.header__links_create}`}
+                        >
                             Create article
                         </Link>
-                        <Link to="/profile" className="header__link header__link_profile-style">
+                        <Link
+                            to="/profile"
+                            className={`${classes.header__links__link} ${classes.header__links_profile}`}
+                        >
                             {data?.username}
                         </Link>
-                        <Link to="/profile" className="header__image-box">
-                            <img src={data?.image || imgProfile} alt="profile" className="header__image" />
+                        <Link to="/profile" className={classes.header__image}>
+                            <img
+                                src={data?.image || imgProfile}
+                                alt="profile"
+                                className={classes.header__image__item}
+                            />
                         </Link>
                         <button
                             type="button"
-                            className="header__logout"
+                            className={classes.header__logout}
                             onClick={() => {
                                 localStorage.removeItem('token');
                                 dispatch(toggleInAccount(false));
@@ -56,10 +66,16 @@ export default function Header() {
                     </>
                 ) : (
                     <>
-                        <NavLink to="/sign-in" className="header__link header__link_sign-style">
+                        <NavLink
+                            to="/sign-in"
+                            className={`${classes.header__links__link} ${classes.header__links_sign}`}
+                        >
                             Sign In
                         </NavLink>
-                        <NavLink to="/sign-up" className="header__link header__link_sign-style">
+                        <NavLink
+                            to="/sign-up"
+                            className={`${classes.header__links__link} ${classes.header__links_sign}`}
+                        >
                             Sign Up
                         </NavLink>
                     </>
