@@ -3,7 +3,9 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const articlesApi = createApi({
     reducerPath: 'articlesApi',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'https://blog.kata.academy/api/',
+        baseUrl: 'https://blog-platform.kata.academy/api/',
+        // mode: 'cors',
+        // credentials: 'same-origin',
         prepareHeaders: (headers) => {
             const token = localStorage.getItem('token');
             if (token) {
@@ -18,7 +20,7 @@ export const articlesApi = createApi({
             query: ({ limit = 5, currentPage = 1 }) => ({
                 url: 'articles',
                 params: { limit, offset: (currentPage - 1) * limit },
-                metod: 'GET',
+                method: 'GET',
             }),
             providesTags: (result) =>
                 result

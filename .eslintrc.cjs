@@ -16,6 +16,7 @@ module.exports = {
     plugins: ['react-refresh', 'react', 'import', 'jsx-a11y'],
     rules: {
         // camelcase: 'off',
+        'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
         'react/jsx-props-no-spreading': 'off',
         'import/prefer-default-export': 'off', // далее отключить
         'react/react-in-jsx-scope': 'off',
