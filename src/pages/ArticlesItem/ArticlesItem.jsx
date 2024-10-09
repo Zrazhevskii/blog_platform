@@ -1,10 +1,10 @@
-import './PostsItem.css';
+import './ArticlesItem.css';
 import PropTypes from 'prop-types';
 import { format } from 'date-fns';
 import { changeUserName } from '../../helpers/changeUserName';
 import ArticleTitleBox from '../../components/ArticleTitleBox';
 
-export default function PostsItem({ elem }) {
+export default function ArticlesItem({ elem }) {
     const { createdAt, author } = elem;
     const { username, image } = author;
     const date = createdAt ? format(createdAt, 'MMMM dd, yyyy') : 'Дата неуказана';
@@ -23,7 +23,7 @@ export default function PostsItem({ elem }) {
     );
 }
 
-PostsItem.propTypes = {
+ArticlesItem.propTypes = {
     elem: PropTypes.shape({
         createdAt: PropTypes.string,
         author: PropTypes.shape({

@@ -1,8 +1,8 @@
-@import '../PostsItem/PostsItem.css';
+@import '../ArticlesItem/ArticlesItem.css';
 
 .article {
     display: grid;
-    grid-template-rows: 140px 1fr ;
+    grid-template-rows: 140px 1fr;
     box-sizing: border-box;
 
     padding-top: 26px;
@@ -20,7 +20,7 @@
 
 .loader {
     width: 170px;
-    
+
     margin: auto;
     margin-top: 30px;
 }
@@ -58,7 +58,8 @@
     background-color: #ffffff;
 }
 
-.box__btns__delete:hover, .box__btns__edit:hover {
+.box__btns__delete:hover,
+.box__btns__edit:hover {
     cursor: pointer;
     transform: scale(1.04);
 }
