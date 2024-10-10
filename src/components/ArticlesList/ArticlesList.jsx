@@ -13,7 +13,7 @@ export default function ArticlesList() {
 
     if (isLoading) {
         return (
-            <div className="loader">
+            <div className={classes.loader}>
                 <PuffLoader color="#52c4a1" size={150} />
             </div>
         );

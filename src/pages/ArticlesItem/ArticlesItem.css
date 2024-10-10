@@ -1,4 +1,4 @@
-.post__box {
+.article__header {
     display: flex;
     flex-direction: row;
     box-sizing: border-box;
@@ -10,148 +10,36 @@
     background-color: #fff;
 }
 
-.post__box_shadow-margin {
+.article__header_margin {
     box-shadow: 8px 8px 13px -5px rgba(0,0,0,0.61);
     margin-top: 20px;
 }
 
-
-
-
-
-.post__box__content {
-    display: flex;
-    flex-direction: column;
-
-    width: 80%;
-    /* height: 70px; */
-}
-
-.post__box__title-box {
-    display: flex;
-    flex-direction: row;
-
-    min-width: 50%;
-    /* border: 1px solid red; */
-}
-
-.post__box__title {
-    font-size: 20px;
-    font-weight: 400;
-    text-decoration: none;
-
-    margin: 0;
-    color: #1890ff;
-}
-
-.post__box__btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    width: 40px;
-    height: 22px;
-
-    margin-left: 20px;
-    padding-top: 7px;
-
-    border: none;
-    background-color: #fff;
-}
-
-.post__box__btn:hover {
-    cursor: pointer;
-}
-
-.post__box__unfavorites::before {
-    content: '';
-
-    width: 17px;
-    height: 17px;
-
-    background: no-repeat url('../../assets/heart.png');
-
-    position: relative;
-    left: -5px;
-}
-
-.post__box__favorites::before {
-    content: '';
-
-    width: 17px;
-    height: 17px;
-
-    background: no-repeat url('../../assets/path.png');
-
-    position: relative;
-    left: -5px;
-}
-
-.post__box__tags-box {
-    display: flex;
-    flex-direction: row;
-
-    margin-top: 5px;
-}
-
-.post__box__tag {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    height: 20px;
-
-    box-sizing: border-box;
-    background-color: rgb(254, 253, 253);
-
-    font-size: 12px;
-    font-weight: 400;
-    
-    border: 1px solid black;
-    border-radius: 2px;
-
-    padding: 2px 4px;
-    margin-right: 10px;
-}
-
-.post__box__description {
-    display: block;
-    height: 50px;
-    font-size: 12px;
-    font-weight: 400;
-
-    margin-top: 10px;
-}
-
-
-
-
-
-.post__box__author-box {
+.user {
     display: flex;
     flex-direction: row;
     justify-content: end;
     width: 20%;
 }
 
-.post__box__name {
+.user__name {
     font-size: 18px;
 }
 
-.post__box__name-box {
+.user__content {
     display: flex;
     flex-direction: column;
     align-items: end;
     margin-right: 20px;
 }
 
-.post__box__img {
+.user__img {
     width: 50px;
     height: 50px;
     border-radius: 50%;
 }
 
-.post__box__created {
+.user__created {
     font-size: 12px;
     opacity: 0.5;
 }

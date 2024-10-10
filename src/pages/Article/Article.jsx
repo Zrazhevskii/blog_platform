@@ -1,9 +1,9 @@
 import { Link, useParams } from 'react-router-dom';
 import { PuffLoader } from 'react-spinners';
 import { format } from 'date-fns';
-import './Article.css';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import classes from './Article.module.scss';
 import { changeUserName } from '../../helpers/changeUserName';
 import { useGetArticleItemQuery } from '../../servises/articlesApi';
 import Modal from '../../components/Modal/index';
@@ -19,7 +19,7 @@ export default function Article() {
 
     if (isLoading) {
         return (
-            <div className="loader">
+            <div className={classes.loader}>
                 <PuffLoader color="#52c4a1" size={130} />
             </div>
         );
@@ -35,35 +35,35 @@ export default function Article() {
 
     return (
         isSuccess && (
-            <section className="article">
-                <div className="post__box">
+            <section className={classes.article}>
+                <div className={classes.article__header}>
                     <ArticleTitleBox elem={data.article} />
-                    <div className="post__box__author-wrapper">
-                        <div className="post__box__author-box post__box__author-box_width">
-                            <div className="post__box__name-box">
-                                <span className="post__box__name">{changeUserName(username)}</span>
-                                <span className="post__box__created">{date}</span>
+                    <div className={classes.article__header__wrapper}>
+                        <div className={`${classes.user} ${classes.user_width}`}>
+                            <div className={classes.user__content}>
+                                <span className={classes.user__content__name}>{changeUserName(username)}</span>
+                                <span className={classes.user__content__created}>{date}</span>
                             </div>
-                            <img src={image} alt="автор" className="post__box__img" />
+                            <img src={image} alt="автор" className={classes.user__img} />
                         </div>
                         {inAccount && dataUser.username === username && (
-                            <div className="box__btns">
+                            <div className={classes.box__btns}>
                                 <button
                                     type="button"
-                                    className="box__btns__delete"
+                                    className={classes.box__btns__delete}
                                     onClick={() => handleChangeShowModal(true)}
                                 >
                                     Delete
                                 </button>
                                 {showModal && <Modal slug={slug} handleChangeShowModal={handleChangeShowModal} />}
-                                <Link to={`/articles/${slug}/edit`} className="box__btns__edit">
+                                <Link to={`/articles/${slug}/edit`} className={classes.box__btns__edit}>
                                     Edit
                                 </Link>
                             </div>
                         )}
                     </div>
                 </div>
-                <div className="article__content">{body}</div>
+                <div className={classes.article__content}>{body}</div>
             </section>
         )
     );
