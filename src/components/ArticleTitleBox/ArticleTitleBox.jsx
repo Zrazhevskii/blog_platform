@@ -1,8 +1,8 @@
-import './ArticleTitleBox.css';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
 import { Link } from 'react-router-dom';
+import classes from './ArticleTitleBox.module.scss';
 import { useAddFavoriteMutation, useDeletFavoriteMutation } from '../../servises/articlesApi';
 
 export default function ArticleTitleBox({ elem, isArticle = true }) {
@@ -18,35 +18,35 @@ export default function ArticleTitleBox({ elem, isArticle = true }) {
         }
     };
     return (
-        <div className="post__box__content">
-            <div className="post__box__title-box">
+        <div className={classes.cap}>
+            <div className={classes.cap__box}>
                 {isArticle ? (
-                    <span className="post__box__title">{title}</span>
+                    <span className={classes.cap__box__title}>{title}</span>
                 ) : (
-                    <Link to={`/articles/${slug}`} className="post__box__title">
+                    <Link to={`/articles/${slug}`} className={classes.cap__box__title}>
                         {title}
                     </Link>
                 )}
                 <button
                     type="button"
-                    className={`post__box__btn ${!favorited ? 'post__box__unfavorites' : 'post__box__favorites'}`}
+                    className={`${classes.cap__box__btn} ${!favorited ? classes.cap__box__unfavorites : classes.cap__box__favorites}`}
                     onClick={toggleFavorite}
                 >
                     {favoritesCount}
                 </button>
             </div>
-            <div className="post__box__tags-box">
+            <div className={classes.cap__tags}>
                 {tagList.length
                     ? tagList.map((item) => {
                           return (
-                              <span key={uuidv4()} className="post__box__tag">
+                              <span key={uuidv4()} className={classes.cap__tags__tag}>
                                   {item}
                               </span>
                           );
                       })
                     : 'без тегов'}
             </div>
-            <div className="post__box__description">{description.split(' ').slice(0, 50).join(' ')}</div>
+            <div className={classes.cap__description}>{description.split(' ').slice(0, 50).join(' ')}</div>
         </div>
     );
 }

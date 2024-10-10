@@ -15,6 +15,10 @@
     margin-top: 20px;
 }
 
+
+
+
+
 .post__box__content {
     display: flex;
     flex-direction: column;
@@ -118,6 +122,10 @@
 
     margin-top: 10px;
 }
+
+
+
+
 
 .post__box__author-box {
     display: flex;
