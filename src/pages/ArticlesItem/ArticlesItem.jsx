@@ -1,5 +1,5 @@
-import './ArticlesItem.css';
 import PropTypes from 'prop-types';
+import './ArticlesItem.css';
 import { format } from 'date-fns';
 import { changeUserName } from '../../helpers/changeUserName';
 import ArticleTitleBox from '../../components/ArticleTitleBox';
@@ -10,14 +10,14 @@ export default function ArticlesItem({ elem }) {
     const date = createdAt ? format(createdAt, 'MMMM dd, yyyy') : 'Дата неуказана';
 
     return (
-        <section className="post__box post__box_shadow-margin">
+        <section className="article__header article__header_margin">
             <ArticleTitleBox elem={elem} isArticle={false} />
-            <div className="post__box__author-box">
-                <div className="post__box__name-box">
-                    <span className="post__box__name">{changeUserName(username)}</span>
-                    <span className="post__box__created">{date}</span>
+            <div className="user">
+                <div className="user__content">
+                    <span className="user__name">{changeUserName(username)}</span>
+                    <span className="user__created">{date}</span>
                 </div>
-                <img src={image} alt="автор" className="post__box__img" />
+                <img src={image} alt="автор" className="user__img" />
             </div>
         </section>
     );
