@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { toggleInAccount } from '../../redusers/ArticlesListReduser';
 import { shemaSignIn } from '../../components/Form/formSchema';
-import './SignIn.css';
+import classes from './SignIn.module.scss';
 import Email from '../../components/Form/Email';
 import Password from '../../components/Form/Password';
 import { useGetExistingUserMutation } from '../../servises/authUserApi';
@@ -48,19 +48,19 @@ export default function SignIn() {
     };
 
     return (
-        <section className="registration__form">
-            <div className="registration__form__box registration__form__box_height">
-                <span className="registration__form__title registration__form__title_margin-bottom">Sign In</span>
-                <form action="" className="form" onSubmit={handleSubmit(onSubmit)}>
+        <section className={classes.container}>
+            <div className={`${classes.container__box} ${classes.container_height}`}>
+                <span className={`${classes.container__box__title} ${classes.container__box_margin}`}>Sign In</span>
+                <form action="" className={classes.form} onSubmit={handleSubmit(onSubmit)}>
                     <Email form={form} name="email" />
                     <Password form={form} name="password" title="Password" />
-                    <button type="submit" className="form__button">
+                    <button type="submit" className={classes.form__button}>
                         Login
                     </button>
                 </form>
-                <span className="registration__form__footer">
+                <span className={classes.container__box__footer}>
                     Don`t have an account?
-                    <Link to="/sign-up" className="registration__form__footer-link">
+                    <Link to="/sign-up" className={classes.container__box__footer__link}>
                         Sign Up
                     </Link>
                 </span>

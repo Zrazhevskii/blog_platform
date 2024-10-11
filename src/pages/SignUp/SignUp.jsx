@@ -76,7 +76,7 @@ export default function SignUp() {
                     />
                 )}
             </section>
-            <div className={`${classes.container__box} ${classes.container__box_high}`}>
+            <div className={`${classes.container__box} ${classes.container_high}`}>
                 <span className={`${classes.container__box__title} ${classes.container__box_margin}`}>
                     Create new account
                 </span>
