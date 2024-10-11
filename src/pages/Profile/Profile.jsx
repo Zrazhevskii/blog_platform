@@ -1,10 +1,10 @@
-import './Profile.css';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect } from 'react';
 import { Alert } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import classes from './Profile.module.scss';
 import LabelUser from '../../components/Form/LabelUser';
 import Email from '../../components/Form/Email';
 import { shemaProfile } from '../../components/Form/formSchema';
@@ -32,7 +32,6 @@ export default function Profile() {
     } = form;
 
     const changeHeader = () => {
-        // console.log(succes);
         setTimeout(() => {
             console.log(succes);
             console.log(isSuccess);
@@ -78,14 +77,14 @@ export default function Profile() {
     }, [data?.username, data?.email, data?.password, form]);
 
     return (
-        <section className="profile">
+        <section className={classes.profile}>
             {succes && (
-                <section className="profile__popup">
+                <section className={classes.succes}>
                     <Alert message="Success!" type="success" description="Вы успешно изменили профиль!" showIcon />
                 </section>
             )}
             {error && (
-                <section className="errors">
+                <section className={classes.errors}>
                     <Alert
                         message="Error!"
                         type="error"
@@ -94,25 +93,31 @@ export default function Profile() {
                     />
                 </section>
             )}
-            <span className="profile__title">Edit Profile</span>
-            <form className="form">
+            <span className={classes.profile__title}>Edit Profile</span>
+            <form className={classes.form}>
                 <LabelUser form={form} name="username" />
                 <Email form={form} name="email" />
                 <Password form={form} name="newPassword" title="New Password" />
-                <label htmlFor="password" className="form__label">
+                <label htmlFor="password" className={classes.form__label}>
                     Avatar image(url)
                     <input
                         {...register('urlAvatar')}
                         type="text"
                         id="urlAvatar"
-                        className={`${'form__input'} ${errors?.urlAvatar ? 'form__input_margin-top' : 'form__input_margin'}`}
+                        className={`${classes.form__label__input} ${errors?.urlAvatar ? classes.form__label_top : classes.form__label_margin}`}
                         placeholder="Avatar image"
                     />
                     <div>
-                        {errors?.urlAvatar && <p className="errors__text">{errors?.urlAvatar?.message || 'Error'}</p>}
+                        {errors?.urlAvatar && (
+                            <p className={classes.errors__text}>{errors?.urlAvatar?.message || 'Error'}</p>
+                        )}
                     </div>
                 </label>
-                <button type="submit" className="form__button form__button_margin" onClick={handleSubmit(onSubmit)}>
+                <button
+                    type="submit"
+                    className={`${classes.form__button} ${classes.form__button_margin}`}
+                    onClick={handleSubmit(onSubmit)}
+                >
                     Save
                 </button>
             </form>
