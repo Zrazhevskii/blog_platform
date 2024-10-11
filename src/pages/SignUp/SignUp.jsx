@@ -1,10 +1,9 @@
 import { useForm } from 'react-hook-form';
-import './SignUp.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Alert } from 'antd';
-// import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import classes from './SignUp.module.scss';
 import { toggleInAccount, toggleSucces, toggleError } from '../../redusers/ArticlesListReduser';
 import LabelUser from '../../components/Form/LabelUser';
 import Email from '../../components/Form/Email';
@@ -61,13 +60,13 @@ export default function SignUp() {
     };
 
     return (
-        <section className="registration__form">
-            <section className="registration__form__popup">
+        <section className={classes.container}>
+            <section className={classes.succes}>
                 {succes && (
                     <Alert message="Success!" type="success" description="Вы успешно прошли регистрацию!" showIcon />
                 )}
             </section>
-            <section className="registration__form__error">
+            <section className={classes.errors}>
                 {error && (
                     <Alert
                         message="Error!"
@@ -77,23 +76,23 @@ export default function SignUp() {
                     />
                 )}
             </section>
-            <div className="registration__form__box registration__form__box_high">
-                <span className="registration__form__title registration__form__title_margin-bottom">
+            <div className={`${classes.container__box} ${classes.container__box_high}`}>
+                <span className={`${classes.container__box__title} ${classes.container__box_margin}`}>
                     Create new account
                 </span>
-                <form action="" className="form" onSubmit={handleSubmit(onSubmit)}>
+                <form action="" className={classes.form} onSubmit={handleSubmit(onSubmit)}>
                     <LabelUser form={form} name="username" />
                     <Email form={form} name="email" />
                     <Password form={form} name="password" title="Password" />
                     <Password form={form} name="repeatPassword" title="Repeat Password" />
                     <Checkbox form={form} name="toggle" />
-                    <button type="submit" className="form__button">
+                    <button type="submit" className={classes.form__button}>
                         Create
                     </button>
                 </form>
-                <span className="registration__form__footer">
+                <span className={classes.container__box__footer}>
                     Already have an account?
-                    <Link to="/sign-in" className="registration__form__footer-link">
+                    <Link to="/sign-in" className={classes.container__box__footer__link}>
                         Sign In
                     </Link>
                 </span>
