@@ -35,5 +35,6 @@ module.exports = {
         'jsx-a11y/no-autofocus': 'off',
         'no-useless-return': 'error',
         'react/require-default-props': 0,
+        'no-param-reassign': 'off',
     },
 };

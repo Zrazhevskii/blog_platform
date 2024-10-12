@@ -12,21 +12,15 @@ const ArticlesListReduser = createSlice({
     initialState,
     reducers: {
         toggleCurrentPage: (state, { payload }) => {
-            // eslint-disable-next-line no-param-reassign
             state.currentPage = payload;
         },
         toggleInAccount: (state, { payload }) => {
-            // eslint-disable-next-line no-param-reassign
             state.inAccount = payload;
         },
         toggleSucces: (state, { payload }) => {
-            console.log(payload);
-            // eslint-disable-next-line no-param-reassign
             state.succes = payload;
         },
         toggleError: (state, action) => {
-            // console.log(action);
-            // eslint-disable-next-line no-param-reassign
             state.error = action.payload;
         },
     },

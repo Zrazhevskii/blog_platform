@@ -1,4 +1,5 @@
 import { Link, useParams } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
 import { PuffLoader } from 'react-spinners';
 import { format } from 'date-fns';
 import { useState } from 'react';
@@ -63,7 +64,9 @@ export default function Article() {
                         )}
                     </div>
                 </div>
-                <div className={classes.article__content}>{body}</div>
+                <div className={classes.article__content}>
+                    <ReactMarkdown>{body}</ReactMarkdown>
+                </div>
             </section>
         )
     );
