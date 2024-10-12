@@ -1,6 +1,6 @@
 import React from 'react';
-import './Form.css';
 import PropTypes from 'prop-types';
+import classes from './Form.module.scss';
 
 export default function Checkbox({ form, name }) {
     const {
@@ -10,13 +10,23 @@ export default function Checkbox({ form, name }) {
 
     return (
         <>
-            <label htmlFor="checkbox" className="form__label-checkbox">
-                <input {...register(name)} type="checkbox" id={name} name="toggle" className="form__checkbox" />
-                <span className="form__label-text">I agree to the processing of my personal information</span>
+            <label htmlFor="checkbox" className={classes.form__checkbox}>
+                <input
+                    {...register(name)}
+                    type="checkbox"
+                    id={name}
+                    name="toggle"
+                    className={classes.form__checkbox__input}
+                />
+                <span className={classes.form__checkbox__text}>
+                    I agree to the processing of my personal information
+                </span>
             </label>
             <div>
                 {errors?.[name] && (
-                    <p className="errors__text errors__text_margin">{errors?.[name]?.message || 'Error'}</p>
+                    <p className={`${classes.errors__text} ${classes.errors__text_margin}`}>
+                        {errors?.[name]?.message || 'Error'}
+                    </p>
                 )}
             </div>
         </>

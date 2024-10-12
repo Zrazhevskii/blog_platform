@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './Form.css';
+import classes from './Form.module.scss';
 
 export default function Password({ form, name, title }) {
     const {
@@ -9,16 +9,16 @@ export default function Password({ form, name, title }) {
     } = form;
 
     return (
-        <label htmlFor="password" className="form__label">
+        <label htmlFor="password" className={classes.form__label}>
             {title}
             <input
                 {...register(name)}
                 type="password"
                 id={name}
-                className={`${'form__input'} ${errors?.[name] ? 'form__input_margin-top' : 'form__input_margin'}`}
+                className={`${classes.form__label__input} ${errors?.[name] ? classes.form__label_top : classes.form__label_margin}`}
                 placeholder={title}
             />
-            <div>{errors?.[name] && <p className="errors__text">{errors?.[name]?.message || 'Error'}</p>}</div>
+            <div>{errors?.[name] && <p className={classes.errors__text}>{errors?.[name]?.message || 'Error'}</p>}</div>
         </label>
     );
 }
