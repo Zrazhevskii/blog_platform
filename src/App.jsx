@@ -1,7 +1,6 @@
 // import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
-import './index.css';
 import PageNotFound from './pages/PageNotFound';
 import Layout from './components/Layout';
 import SignIn from './pages/SignIn';
