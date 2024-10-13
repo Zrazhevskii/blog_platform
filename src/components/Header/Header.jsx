@@ -14,9 +14,7 @@ export default function Header() {
         skip: !inAccount,
         refetchOnMountOrArgChange: true,
     });
-    // console.log(data);
     const storage = localStorage.getItem('token');
-    // console.log(storage);
     useEffect(() => {
         if (storage) {
             dispatch(toggleInAccount(true));

@@ -1,14 +1,19 @@
 import PropTypes from 'prop-types';
 import { useFieldArray, useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { Alert } from 'antd';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
 import { shemaNewArticle } from '../../components/Form/formSchema';
 import { useAddNewArticleMutation, useEditArticleMutation } from '../../servises/articlesApi';
+import { toggleError } from '../../redusers/ArticlesListReduser';
 import classes from './NewArticle.module.scss';
 
 export default function NewArticle({ article = {} }) {
     const { slug } = article;
     const navigate = useNavigate();
+    const error = useSelector((state) => state.articles.error);
+    const dispatch = useDispatch();
     const [addNewArticle] = useAddNewArticleMutation();
     const [editArticle] = useEditArticleMutation();
     const form = useForm({
@@ -46,6 +51,7 @@ export default function NewArticle({ article = {} }) {
                     navigate('/');
                 })
                 .catch((err) => {
+                    dispatch(toggleError(true));
                     console.log('это err - ', err);
                 });
         } else {
@@ -55,8 +61,9 @@ export default function NewArticle({ article = {} }) {
                     reset();
                     navigate('/');
                 })
-                .catch(() => {
-                    // console.log('это err - ', err);
+                .catch((err) => {
+                    console.log('это err - ', err);
+                    dispatch(toggleError(true));
                 });
         }
     };
@@ -68,6 +75,16 @@ export default function NewArticle({ article = {} }) {
 
     return (
         <section className={classes.newArticle}>
+            {error && (
+                <section className={classes.errors}>
+                    <Alert
+                        message="Error!"
+                        type="error"
+                        description="Что-то пошло не так, перегрузите страницу..."
+                        showIcon
+                    />
+                </section>
+            )}
             <span className={classes.newArticle__title}>{article.title ? 'Edit title' : 'Create new article'}</span>
             <form className={classes.newArticle__form} onSubmit={handleSubmit(onSubmit)}>
                 <label htmlFor="title" className={classes.newArticle__label}>

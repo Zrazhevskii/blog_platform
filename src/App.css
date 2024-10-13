@@ -7,23 +7,3 @@ body {
     margin: 0;
     padding: 0;
 }
-
-/* :where(.css-dev-only-do-not-override-qnu6hi).ant-pagination .ant-pagination-item {
-    background-color: #ebeef3;
-}
-
-:where(.css-dev-only-do-not-override-qnu6hi).ant-pagination .ant-pagination-item-active a {
-    color: #fff;
-    background-color: #1677ff;
-    border-radius: 5px;
-}
-
-:where(.css-dev-only-do-not-override-qnu6hi).ant-pagination .ant-pagination-item-active {
-    border: none;
-    border-radius: 5px;
-}
-
-:where(.css-dev-only-do-not-override-qnu6hi).ant-pagination .ant-pagination-item-active a:hover {
-    color: #fff;
-    background-color: #438ffa;
-} */

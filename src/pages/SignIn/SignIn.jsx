@@ -22,11 +22,9 @@ export default function SignIn() {
 
     const onSubmit = async (data) => {
         const request = { user: { email: data.email, password: data.password } };
-        // console.log(request);
         await getExistingUser(request)
             .unwrap()
             .then((payload) => {
-                // console.log('fulfilled', payload);
                 localStorage.setItem('token', payload.user.token);
                 dispatch(toggleInAccount(true));
                 reset();
