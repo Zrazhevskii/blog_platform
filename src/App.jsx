@@ -10,6 +10,7 @@ import Article from './pages/Article';
 import NewArticle from './pages/NewArticle';
 import Profile from './pages/Profile';
 import EditArticle from './pages/EditArticle';
+import PrivateRoute from './components/PrivateRoute';
 import { BASE_PATH, ARTICLES_SLUG, NEW_ARTICLE, PROFILE, ARTICLES_SLUG_EDIT, SIGN_UP, SIGN_IN, NO_PAGE } from './path';
 
 function App() {
@@ -32,9 +33,15 @@ function App() {
                 <Route path={BASE_PATH} element={<Layout />}>
                     <Route index element={<ArticlesList />} />
                     <Route path={ARTICLES_SLUG} element={<Article />} />
-                    <Route path={NEW_ARTICLE} element={<NewArticle />} />
-                    <Route path={PROFILE} element={<Profile />} />
-                    <Route path={ARTICLES_SLUG_EDIT} element={<EditArticle />} />
+                    <Route element={<PrivateRoute />}>
+                        <Route path={PROFILE} element={<Profile />} />
+                    </Route>
+                    <Route element={<PrivateRoute />}>
+                        <Route path={NEW_ARTICLE} element={<NewArticle />} />
+                    </Route>
+                    <Route element={<PrivateRoute />}>
+                        <Route path={ARTICLES_SLUG_EDIT} element={<EditArticle />} />
+                    </Route>
                     <Route path={SIGN_UP} element={<SignUp />} />
                     <Route path={SIGN_IN} element={<SignIn />} />
                     <Route path={NO_PAGE} element={<PageNotFound />} />
