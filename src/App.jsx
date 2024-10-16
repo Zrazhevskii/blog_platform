@@ -31,12 +31,12 @@ function App() {
             <Routes>
                 <Route path="/" element={<Layout />}>
                     <Route index element={<ArticlesList />} />
-                    <Route path={import.meta.env.VITE_APP_ARTICLES_SLUG} element={<Article />} />
-                    <Route path={import.meta.env.VITE_NEW_ARTICLE} element={<NewArticle />} />
-                    <Route path={import.meta.env.VITE_PROFILE} element={<Profile />} />
-                    <Route path={import.meta.env.VITE_ARTICLE_SLUG_EDIT} element={<EditArticle />} />
-                    <Route path={import.meta.env.VITE_SIGN_UP} element={<SignUp />} />
-                    <Route path={import.meta.env.VITE_SIGN_IN} element={<SignIn />} />
+                    <Route path="articles/:slug" element={<Article />} />
+                    <Route path="new-article" element={<NewArticle />} />
+                    <Route path="profile" element={<Profile />} />
+                    <Route path="articles/:slug/edit" element={<EditArticle />} />
+                    <Route path="/sign-up" element={<SignUp />} />
+                    <Route path="/sign-in" element={<SignIn />} />
                     <Route path="*" element={<PageNotFound />} />
                 </Route>
             </Routes>
