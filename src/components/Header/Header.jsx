@@ -32,21 +32,24 @@ export default function Header() {
                 {inAccount ? (
                     <>
                         <Link
-                            to="/new-article"
+                            to={import.meta.env.VITE_NEW_ARTICLE}
                             className={`${classes.header__links__link} ${classes.header__links_create}`}
                         >
                             Create article
                         </Link>
                         <Link
-                            to="/profile"
+                            to={import.meta.env.VITE_PROFILE}
                             className={`${classes.header__links__link} ${classes.header__links_profile}`}
                         >
                             {data?.username}
                         </Link>
-                        <Link to="/profile" className={classes.header__image}>
+                        <Link to={import.meta.env.VITE_PROFILE} className={classes.header__image}>
                             <img
-                                src={data?.image || imgProfile}
+                                src={data?.image}
                                 alt="profile"
+                                onError={(e) => {
+                                    e.target.src = imgProfile;
+                                }}
                                 className={classes.header__image__item}
                             />
                         </Link>
@@ -65,13 +68,13 @@ export default function Header() {
                 ) : (
                     <>
                         <NavLink
-                            to="/sign-in"
+                            to={import.meta.env.VITE_SIGN_IN}
                             className={`${classes.header__links__link} ${classes.header__links_sign}`}
                         >
                             Sign In
                         </NavLink>
                         <NavLink
-                            to="/sign-up"
+                            to={import.meta.env.VITE_SIGN_UP}
                             className={`${classes.header__links__link} ${classes.header__links_sign}`}
                         >
                             Sign Up

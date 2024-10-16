@@ -3,6 +3,7 @@ import { format } from 'date-fns';
 import classes from './ArticlesItem.module.scss';
 import { changeUserName } from '../../helpers/changeUserName';
 import ArticleTitleBox from '../../components/ArticleTitleBox';
+import imgProfile from '../../assets/imgProfile.png';
 
 export default function ArticlesItem({ elem }) {
     const { createdAt, author } = elem;
@@ -17,7 +18,14 @@ export default function ArticlesItem({ elem }) {
                     <span className={classes.user__content__name}>{changeUserName(username)}</span>
                     <span className={classes.user__content__created}>{date}</span>
                 </div>
-                <img src={image} alt="автор" className={classes.user__img} />
+                <img
+                    src={image}
+                    alt="автор"
+                    onError={(e) => {
+                        e.target.src = imgProfile;
+                    }}
+                    className={classes.user__img}
+                />
             </div>
         </section>
     );

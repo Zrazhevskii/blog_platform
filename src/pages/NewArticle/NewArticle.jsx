@@ -23,7 +23,7 @@ export default function NewArticle({ article = {} }) {
             title: article?.title || '',
             shortDescription: article?.description || '',
             text: article?.body || '',
-            tags: article?.tagList?.map((tag) => ({ number: tag })) || [{ number: '' }],
+            tags: [...(article?.tagList?.map((tag) => ({ number: tag })) || []), { number: '' }] || [{ number: '' }],
         },
     });
     const {
@@ -40,9 +40,15 @@ export default function NewArticle({ article = {} }) {
                 title: data.title,
                 description: data.shortDescription,
                 body: data.text,
-                tagList: data.tags.slice(0, -1).map((item) => item.number),
+                tagList: data.tags.reduce((acc, item) => {
+                    if (item.number.trim().length) {
+                        acc.push(item.number);
+                    }
+                    return acc;
+                }, []),
             },
         };
+
         if (!article.title) {
             await addNewArticle(response)
                 .unwrap()

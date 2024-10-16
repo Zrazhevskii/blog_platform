@@ -2,28 +2,32 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import classes from './ArticleTitleBox.module.scss';
 import { useAddFavoriteMutation, useDeletFavoriteMutation } from '../../servises/articlesApi';
 
-export default function ArticleTitleBox({ elem, isArticle = true }) {
+export default function ArticleTitleBox({ elem, isArticle = true, allDescription = false }) {
+    const inAccount = useSelector((state) => state.articles.inAccount);
     const [addFavorite] = useAddFavoriteMutation();
     const [deletFavorite] = useDeletFavoriteMutation();
     const { slug, title, favoritesCount, tagList, description, favorited } = elem;
 
     const toggleFavorite = () => {
+        if (!inAccount) return;
         if (!favorited) {
             addFavorite(slug);
         } else {
             deletFavorite(slug);
         }
     };
+
     return (
         <div className={classes.cap}>
             <div className={classes.cap__box}>
                 {isArticle ? (
                     <span className={classes.cap__box__title}>{title}</span>
                 ) : (
-                    <Link to={`/articles/${slug}`} className={classes.cap__box__title}>
+                    <Link to={`${import.meta.env.VITE_ARTICLES}${slug}`} className={classes.cap__box__title}>
                         {title}
                     </Link>
                 )}
@@ -46,7 +50,9 @@ export default function ArticleTitleBox({ elem, isArticle = true }) {
                       })
                     : 'без тегов'}
             </div>
-            <div className={classes.cap__description}>{description.split(' ').slice(0, 50).join(' ')}</div>
+            <div className={classes.cap__description}>
+                {allDescription ? description : description.split(' ').slice(0, 50).join(' ')}
+            </div>
         </div>
     );
 }
@@ -62,4 +68,5 @@ ArticleTitleBox.propTypes = {
         favorited: PropTypes.bool,
     }),
     isArticle: PropTypes.bool,
+    allDescription: PropTypes.bool,
 };

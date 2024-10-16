@@ -58,7 +58,7 @@ export default function SignIn() {
                 </form>
                 <span className={classes.container__box__footer}>
                     Don`t have an account?
-                    <Link to="/sign-up" className={classes.container__box__footer__link}>
+                    <Link to={import.meta.env.VITE_SIGN_UP} className={classes.container__box__footer__link}>
                         Sign Up
                     </Link>
                 </span>

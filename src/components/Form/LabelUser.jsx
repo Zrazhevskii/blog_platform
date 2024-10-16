@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classes from './Form.module.scss';
-// import { message } from 'antd';
 
 export default function LabelUser({ form, name }) {
-    // console.log(name);
     const {
         register,
         formState: { errors },
