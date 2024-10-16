@@ -1,4 +1,3 @@
-// import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import { ConfigProvider } from 'antd';
@@ -11,6 +10,7 @@ import Article from './pages/Article';
 import NewArticle from './pages/NewArticle';
 import Profile from './pages/Profile';
 import EditArticle from './pages/EditArticle';
+import { BASE_PATH, ARTICLES_SLUG, NEW_ARTICLE, PROFILE, ARTICLES_SLUG_EDIT, SIGN_UP, SIGN_IN, NO_PAGE } from './path';
 
 function App() {
     return (
@@ -29,15 +29,15 @@ function App() {
             }}
         >
             <Routes>
-                <Route path="/" element={<Layout />}>
+                <Route path={BASE_PATH} element={<Layout />}>
                     <Route index element={<ArticlesList />} />
-                    <Route path="articles/:slug" element={<Article />} />
-                    <Route path="new-article" element={<NewArticle />} />
-                    <Route path="profile" element={<Profile />} />
-                    <Route path="articles/:slug/edit" element={<EditArticle />} />
-                    <Route path="/sign-up" element={<SignUp />} />
-                    <Route path="/sign-in" element={<SignIn />} />
-                    <Route path="*" element={<PageNotFound />} />
+                    <Route path={ARTICLES_SLUG} element={<Article />} />
+                    <Route path={NEW_ARTICLE} element={<NewArticle />} />
+                    <Route path={PROFILE} element={<Profile />} />
+                    <Route path={ARTICLES_SLUG_EDIT} element={<EditArticle />} />
+                    <Route path={SIGN_UP} element={<SignUp />} />
+                    <Route path={SIGN_IN} element={<SignIn />} />
+                    <Route path={NO_PAGE} element={<PageNotFound />} />
                 </Route>
             </Routes>
         </ConfigProvider>

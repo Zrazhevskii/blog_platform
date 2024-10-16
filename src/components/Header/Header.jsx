@@ -5,6 +5,7 @@ import classes from './Header.module.scss';
 import { useGetCurrentUserQuery } from '../../servises/authUserApi';
 import imgProfile from '../../assets/imgProfile.png';
 import { toggleInAccount } from '../../redusers/ArticlesListReduser';
+import { NEW_ARTICLE, PROFILE, SIGN_IN, SIGN_UP } from '../../path';
 
 export default function Header() {
     const navigate = useNavigate();
@@ -32,18 +33,18 @@ export default function Header() {
                 {inAccount ? (
                     <>
                         <Link
-                            to={import.meta.env.VITE_NEW_ARTICLE}
+                            to={NEW_ARTICLE}
                             className={`${classes.header__links__link} ${classes.header__links_create}`}
                         >
                             Create article
                         </Link>
                         <Link
-                            to={import.meta.env.VITE_PROFILE}
+                            to={PROFILE}
                             className={`${classes.header__links__link} ${classes.header__links_profile}`}
                         >
                             {data?.username}
                         </Link>
-                        <Link to={import.meta.env.VITE_PROFILE} className={classes.header__image}>
+                        <Link to={PROFILE} className={classes.header__image}>
                             <img
                                 src={data?.image}
                                 alt="profile"
@@ -68,13 +69,13 @@ export default function Header() {
                 ) : (
                     <>
                         <NavLink
-                            to={import.meta.env.VITE_SIGN_IN}
+                            to={SIGN_IN}
                             className={`${classes.header__links__link} ${classes.header__links_sign}`}
                         >
                             Sign In
                         </NavLink>
                         <NavLink
-                            to={import.meta.env.VITE_SIGN_UP}
+                            to={SIGN_UP}
                             className={`${classes.header__links__link} ${classes.header__links_sign}`}
                         >
                             Sign Up
