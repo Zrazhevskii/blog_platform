@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import classes from './ArticleTitleBox.module.scss';
 import { useAddFavoriteMutation, useDeletFavoriteMutation } from '../../servises/articlesApi';
+import { buildArticle } from '../../path';
 
 export default function ArticleTitleBox({ elem, isArticle = true, allDescription = false }) {
     const inAccount = useSelector((state) => state.articles.inAccount);
@@ -27,7 +28,7 @@ export default function ArticleTitleBox({ elem, isArticle = true, allDescription
                 {isArticle ? (
                     <span className={classes.cap__box__title}>{title}</span>
                 ) : (
-                    <Link to={`${import.meta.env.VITE_ARTICLES}${slug}`} className={classes.cap__box__title}>
+                    <Link to={buildArticle(slug)} className={classes.cap__box__title}>
                         {title}
                     </Link>
                 )}

@@ -11,6 +11,7 @@ import Password from '../../components/Form/Password';
 import Checkbox from '../../components/Form/Checkbox';
 import { schemaSighUp } from '../../components/Form/formSchema';
 import { useRegisterUserMutation } from '../../servises/authUserApi';
+import { SIGN_IN } from '../../path';
 
 export default function SignUp() {
     const { succes, error } = useSelector((state) => state.articles);
@@ -92,7 +93,7 @@ export default function SignUp() {
                 </form>
                 <span className={classes.container__box__footer}>
                     Already have an account?
-                    <Link to={import.meta.env.VITE_SIGN_IN} className={classes.container__box__footer__link}>
+                    <Link to={SIGN_IN} className={classes.container__box__footer__link}>
                         Sign In
                     </Link>
                 </span>

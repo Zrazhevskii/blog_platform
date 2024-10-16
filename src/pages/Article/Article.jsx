@@ -11,8 +11,7 @@ import Modal from '../../components/Modal/index';
 import imgProfile from '../../assets/imgProfile.png';
 import { useGetCurrentUserQuery } from '../../servises/authUserApi';
 import ArticleTitleBox from '../../components/ArticleTitleBox';
-
-// import { isValidUrl } from '../../helpers/isValidUrl';
+import { buildArticleEdit } from '../../path';
 
 export default function Article() {
     const [showModal, setShowModal] = useState(false);
@@ -71,10 +70,7 @@ export default function Article() {
                                     Delete
                                 </button>
                                 {showModal && <Modal slug={slug} handleChangeShowModal={handleChangeShowModal} />}
-                                <Link
-                                    to={`${import.meta.env.VITE_ARTICLES}${slug}/edit`}
-                                    className={classes.box__btns__edit}
-                                >
+                                <Link to={buildArticleEdit(slug)} className={classes.box__btns__edit}>
                                     Edit
                                 </Link>
                             </div>
