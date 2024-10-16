@@ -3,8 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const articlesApi = createApi({
     reducerPath: 'articlesApi',
     baseQuery: fetchBaseQuery({
-        // baseUrl: 'https://blog-platform.kata.academy/api/',
-        baseUrl: import.meta.env.VITE_BASE_URL,
+        baseUrl: 'https://blog-platform.kata.academy/api/',
         prepareHeaders: (headers) => {
             const token = localStorage.getItem('token');
             if (token) {
